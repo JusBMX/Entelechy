@@ -2,11 +2,8 @@ package com.boxsmith.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
-import com.boxsmith.level.TileCoordinate;
 
 public abstract class Mob extends Entity {
 
@@ -16,11 +13,11 @@ public abstract class Mob extends Entity {
 	protected int hp;
 
 	protected List<Projectile> projectile = new ArrayList<Projectile>();
-	
+
 	public abstract void update();
-	
+
 	public abstract void render(Screen screen);
-	
+
 	public void move(int xAbs, int yAbs) {
 		if (xAbs != 0 && yAbs != 0) {
 			move(xAbs, 0);
@@ -40,23 +37,17 @@ public abstract class Mob extends Entity {
 			y += yAbs;
 		}
 	}
-	
-	public void attack(Weapons w, Mob m){
-		m.hp -= w.damage;
-	}
 
-	public void walkToTile(TileCoordinate tile){
-
+	public void attack(Weapons w, Mob m) {
+		if (distance(m.x, m.y) <= w.range && w.timer.isTime()) {
+			m.hp -= w.damage;
+		}
 	}
 
 	public int distance(int x, int y) {
 		return (int) (Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2)));
 	}
-	
-	public static int distance(Entity e1, Entity e2) {
-		return (int) (Math.sqrt(Math.pow(e1.x - e2.x, 2) + Math.pow(e1.y - e2.y, 2)));
-	}
-	
+
 	private boolean collision(int xAbs, int yAbs) {
 		boolean soild = false;
 		for (int c = 0; c < 4; c++) {

@@ -12,8 +12,7 @@ public class Man extends Mob {
 	private boolean walking = false;
 	private int anim = 0;
 	private TileCoordinate spawn = new TileCoordinate(2, 2);
-	private Weapons hands = new Weapons(2, 60);
-	private GameTimer timer = new GameTimer(2000);
+	private Weapons hands = new Weapons(2, 2000, 16);
 
 	public Man(int x, int y) {
 		this.x = x;
@@ -26,9 +25,9 @@ public class Man extends Mob {
 		int playerX = level.getPlayer().x;
 		int playerY = level.getPlayer().y;
 		
+		attack(hands, (Mob) level.getPlayer());
+		
 		if (distance(playerX, playerY) <= 16) {
-			if(timer.isTime())
-				attack(hands, (Mob) level.getPlayer());
 			return;
 		}
 		if (TileCoordinate.distance(spawn, TileCoordinate.entityCoords(level.getPlayer())) < 200
