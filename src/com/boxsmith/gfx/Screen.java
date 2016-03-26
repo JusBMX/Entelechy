@@ -24,6 +24,7 @@ public class Screen {
 		}
 	}
 	
+
 	public void renderText(String msg, int x, int y, boolean fixed) {
 		msg = msg.toUpperCase();
 		for (int i = 0; i < msg.length(); i++) {
@@ -51,7 +52,7 @@ public class Screen {
 	}
 
 	public void renderSprite(int xPos, int yPos, Sprite sprite, boolean fixed) {
-		if (fixed){
+		if (fixed) {
 			xPos -= xOffset;
 			yPos -= yOffset;
 		}
@@ -73,19 +74,19 @@ public class Screen {
 			int yAbs = yPos + y;
 			int yFlip = y;
 			if (flip == 2 || flip == 3) {
-				yFlip = 31 - y;
+				yFlip = sprite.getHeight() - 1 - y;
 			}
-			for (int x = 0; x < 32; x++) {
+			for (int x = 0; x < 16; x++) {
 				int xAbs = xPos + x;
 				int xFlip = x;
 				if (flip == 1 || flip == 3) {
-					xFlip = 31 - x;
+					xFlip = sprite.getWidth() - 1 - x;
 				}
-				if (xAbs < -32 || xAbs >= width || yAbs < 0 || yAbs >= height)
+				if (xAbs < -16 || xAbs >= width || yAbs < 0 || yAbs >= height)
 					break;
 				if (xAbs < 0)
 					xAbs = 0;
-				int color = sprite.pixels[xFlip + yFlip * 32];
+				int color = sprite.pixels[xFlip + yFlip * sprite.getWidth()];
 				if (color != 0xFFFF00FF && color != 0xFF000000)
 					pixels[xAbs + yAbs * width] = color;
 			}
@@ -96,6 +97,5 @@ public class Screen {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
-	
 
 }

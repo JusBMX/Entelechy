@@ -43,6 +43,11 @@ public abstract class Mob extends Entity {
 			m.hp -= w.damage;
 		}
 	}
+	
+	public int size(){
+		//sprite.SIZE;
+		return x;
+	}
 
 	public int distance(int x, int y) {
 		return (int) (Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2)));
@@ -51,7 +56,7 @@ public abstract class Mob extends Entity {
 	private boolean collision(int xAbs, int yAbs) {
 		boolean soild = false;
 		for (int c = 0; c < 4; c++) {
-			int xt = ((x + xAbs) + c % 2 * 10 - 6) / 16;
+			int xt = ((x + xAbs) + c % 2 * 10 - 12) / 16;
 			int yt = ((y + yAbs) + c % 2 * 10 + 4) / 16;
 
 			if (level.getTile(xt, yt).soild())

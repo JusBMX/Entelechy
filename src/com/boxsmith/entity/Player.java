@@ -27,6 +27,10 @@ public class Player extends Mob {
 	public void update() {
 		int xA = 0, yA = 0;
 		
+		if(input.attack){
+			
+		}
+		
 		if (anim < 100) {
 			anim++;
 		} else {
