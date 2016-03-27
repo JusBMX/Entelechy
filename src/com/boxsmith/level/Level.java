@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.boxsmith.entity.Entity;
+import com.boxsmith.entity.Mob;
 import com.boxsmith.entity.Player;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.level.tile.Tile;
@@ -53,13 +54,29 @@ public abstract class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
-		for (int i =0; i < entities.size(); i++){
-			entities.get(i).render(screen);
+		for (Entity e : entities){
+			e.render(screen);
 		}
 	}
 
 	public void addEntity(Entity e){
 		entities.add(e);
+	}
+	
+	public void removeEntity(Entity e){
+		entities.remove(e);
+	}
+	
+	public List<Mob> getMobs(){
+		List<Mob> mobs = new ArrayList<Mob>();
+		for(Entity e : entities){
+
+			if(e.getClass().getSuperclass().equals(Mob.class)){
+
+				mobs.add((Mob) e);
+			}
+		}
+		return mobs;
 	}
 	
 	public Entity getPlayer(){

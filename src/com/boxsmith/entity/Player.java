@@ -15,22 +15,21 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
+	private Weapons hands = new Weapons(2, 2000, 16);
 
 	public Player(int x, int y, Keyboard input, Mouse mouse) {
 		this.x = x;
 		this.y = y;
 		this.mouse = mouse;
 		this.input = input;
-		hp = 20;
+		healthPoints = 20;
 	}
 
 	public void update() {
 		int xA = 0, yA = 0;
-		
-		if(input.attack){
-			
+		if (input.attack) {
+			attack(hands, dir);
 		}
-		
 		if (anim < 100) {
 			anim++;
 		} else {
@@ -53,14 +52,36 @@ public class Player extends Mob {
 		} else {
 			walking = false;
 		}
-		clear();
+		if(!isAlive()){
+			respawn();
+		}
+
 	}
 
-	private void clear() {
-		for (int i = 0; i < projectile.size(); i++) {
-			Projectile p = projectile.get(i);
-			if (p.isRemoved())
-				projectile.remove(i);
+
+	public void attack(Weapons w, int dir) {
+		int weaponX = x, weaponY = y;
+		switch (dir) {
+		case 0:
+			weaponY -= w.range;
+			break;
+		case 1:
+			weaponX += w.range;
+			break;
+		case 2:
+			weaponY += w.range;
+			break;
+		case 3:
+			weaponX -= w.range;
+			break;
+		}
+		for (Mob m : level.getMobs()) {
+			if (Math.abs(m.x - weaponX) < 8 && Math.abs(m.y - weaponY) < 16 && !m.equals(this)) {
+				System.out.println(w.timer.timeLeft());
+				if (w.timer.isTime()) {
+					m.healthPoints -= w.damage;
+				}
+			}
 		}
 	}
 
@@ -85,6 +106,6 @@ public class Player extends Mob {
 			flip = 1;
 		}
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
-		screen.renderText("Hp: " + hp, x, y - 10, true);
+		screen.renderText("Hp: " + healthPoints, x, y - 10, true);
 	}
 }

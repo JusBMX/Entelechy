@@ -1,18 +1,15 @@
 package com.boxsmith.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
-	protected int dir = 0;
+	protected int dir = 0, healthPoints, respawnTime;
 	protected boolean moving = false;
-	protected int hp;
-
-	protected List<Projectile> projectile = new ArrayList<Projectile>();
+	GameTimer respawnTimer;
 
 	public abstract void update();
 
@@ -40,13 +37,25 @@ public abstract class Mob extends Entity {
 
 	public void attack(Weapons w, Mob m) {
 		if (distance(m.x, m.y) <= w.range && w.timer.isTime()) {
-			m.hp -= w.damage;
+			m.healthPoints -= w.damage;
 		}
 	}
-	
-	public int size(){
-		//sprite.SIZE;
-		return x;
+
+	public boolean isAlive() {
+		if (healthPoints < 1) {
+			return false;
+		}
+		return true;
+	}
+
+	public void respawn() {
+		level.removeEntity(this);
+		if (respawnTimer == null) {
+			respawnTimer = new GameTimer(respawnTime);
+		} else if (respawnTimer.isTime()) {
+			healthPoints = 10;
+			level.addEntity(this);
+		}
 	}
 
 	public int distance(int x, int y) {

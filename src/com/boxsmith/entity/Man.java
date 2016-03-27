@@ -2,7 +2,6 @@ package com.boxsmith.entity;
 
 import java.util.Random;
 
-import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 import com.boxsmith.level.TileCoordinate;
@@ -17,7 +16,8 @@ public class Man extends Mob {
 	public Man(int x, int y) {
 		this.x = x;
 		this.y = y;
-		hp = 10;
+		healthPoints = 10;
+		respawnTime = 1000;
 	}
 
 	public void update() {
@@ -29,6 +29,11 @@ public class Man extends Mob {
 		
 		if (distance(playerX, playerY) <= 16) {
 			return;
+		}
+		
+		if(!isAlive()){
+			System.out.println("Dead");
+			respawn();
 		}
 		if (TileCoordinate.distance(spawn, TileCoordinate.entityCoords(level.getPlayer())) < 200
 				&& distance(playerX, playerY) > 16 && distance(playerX, playerY) < 100) {
@@ -46,9 +51,9 @@ public class Man extends Mob {
 			}
 
 		} else {
-			if (1 > 480) {
-				spawn = new TileCoordinate(ran.nextInt(4) + 2, ran.nextInt(4) + 2);
-			}
+			//if (1 > 480) {
+			//	spawn = new TileCoordinate(ran.nextInt(4) + 2, ran.nextInt(4) + 2);
+			//}
 			if (spawn.getX() > x) {
 				xA++;
 			}
@@ -96,7 +101,7 @@ public class Man extends Mob {
 			flip = 1;
 		}
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
-		// screen.renderText("Hp: " + hp, x, y - 10, true);
+		screen.renderText("Hp: " + healthPoints, x, y - 10, true);
 	}
 
 }

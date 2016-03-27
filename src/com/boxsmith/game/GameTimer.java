@@ -16,5 +16,9 @@ public class GameTimer {
 		}
 		return false;
 	}
+	
+	public int timeLeft(){
+		return (int) (System.currentTimeMillis() - startTime);
+	}
 
 }

@@ -7,6 +7,13 @@ public class Weapons extends Entity {
 	public int damage, speed, range;
 	public GameTimer timer;
 	
+	
+	/**
+	 * 
+	 * @param damage
+	 * @param speed
+	 * @param range
+	 */
 	public Weapons(int damage, int speed, int range){
 		this.range = range;
 		this.damage = damage;
