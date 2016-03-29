@@ -5,24 +5,22 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.boxsmith.entity.Man;
+import com.boxsmith.entity.Hostile;
 import com.boxsmith.entity.Player;
-import com.boxsmith.game.Game;
 
 public class SpawnLevel extends Level {
 
 	private Player player;
-	private Man man;
+	private Hostile hostile;
 
 	public SpawnLevel(String path) {
 		super(path);
-		TileCoordinate playerSpawn = new TileCoordinate(10, 10);
-		player = new Player(playerSpawn.getX(), playerSpawn.getY(), Game.keys, Game.mouse);
-		man = new Man(2*16, 2*16);
-		addEntity(man);
+		player = new Player(new TileCoordinate(10, 10));
+		hostile = new Hostile(new TileCoordinate(5, 5));
+		addEntity(hostile);
 		addEntity(player);
 		player.intit(this);
-		man.intit(this);
+		hostile.intit(this);
 	}
 
 	protected void loadLevel(String path) {
@@ -40,5 +38,4 @@ public class SpawnLevel extends Level {
 
 	protected void generateLevel() {
 	}
-
 }

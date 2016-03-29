@@ -6,18 +6,18 @@ import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 import com.boxsmith.level.TileCoordinate;
 
-public class Man extends Mob {
+public class Hostile extends Mob {
 	private Random ran = new Random();
 	private boolean walking = false;
 	private int anim = 0;
-	private TileCoordinate spawn = new TileCoordinate(2, 2);
 	private Weapons hands = new Weapons(2, 2000, 16);
 
-	public Man(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Hostile(TileCoordinate spawnpoint) {
+		this.spawnpoint = spawnpoint;
+		x = spawnpoint.getX();
+		y = spawnpoint.getY();
 		healthPoints = 10;
-		respawnTime = 1000;
+		respawnTime = 5000;
 	}
 
 	public void update() {
@@ -31,11 +31,7 @@ public class Man extends Mob {
 			return;
 		}
 		
-		if(!isAlive()){
-			System.out.println("Dead");
-			respawn();
-		}
-		if (TileCoordinate.distance(spawn, TileCoordinate.entityCoords(level.getPlayer())) < 200
+		if (TileCoordinate.distance(spawnpoint, TileCoordinate.entityCoords(level.getPlayer())) < 200
 				&& distance(playerX, playerY) > 16 && distance(playerX, playerY) < 100) {
 			if (playerX > x) {
 				xA++;
@@ -54,16 +50,16 @@ public class Man extends Mob {
 			//if (1 > 480) {
 			//	spawn = new TileCoordinate(ran.nextInt(4) + 2, ran.nextInt(4) + 2);
 			//}
-			if (spawn.getX() > x) {
+			if (spawnpoint.getX() > x) {
 				xA++;
 			}
-			if (spawn.getX() < x) {
+			if (spawnpoint.getX() < x) {
 				xA--;
 			}
-			if (spawn.getY() > y) {
+			if (spawnpoint.getY() > y) {
 				yA++;
 			}
-			if (spawn.getY() < y) {
+			if (spawnpoint.getY() < y) {
 				yA--;
 			}
 		}
@@ -82,7 +78,7 @@ public class Man extends Mob {
 
 	public void render(Screen screen) {
 		int flip = 0;
-		if (dir == 0) {
+		if (direction == 0) {
 			sprite = Sprite.man_forward;
 			if (walking) {
 				if (anim % 25 > 10) {
@@ -92,11 +88,11 @@ public class Man extends Mob {
 				}
 			}
 		}
-		if (dir == 1)
+		if (direction == 1)
 			sprite = Sprite.man_side;
-		if (dir == 2)
+		if (direction == 2)
 			sprite = Sprite.man_back;
-		if (dir == 3) {
+		if (direction == 3) {
 			sprite = Sprite.man_side;
 			flip = 1;
 		}

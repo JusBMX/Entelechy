@@ -3,13 +3,15 @@ package com.boxsmith.entity;
 import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
+import com.boxsmith.level.TileCoordinate;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
-	protected int dir = 0, healthPoints, respawnTime;
 	protected boolean moving = false;
-	GameTimer respawnTimer;
+	public int direction, healthPoints, maxHealthPoints, respawnTime;
+	public GameTimer respawnTimer;
+	public TileCoordinate spawnpoint;
 
 	public abstract void update();
 
@@ -22,13 +24,13 @@ public abstract class Mob extends Entity {
 			return;
 		}
 		if (xAbs > 0)
-			dir = 1;
+			direction = 1;
 		if (xAbs < 0)
-			dir = 3;
+			direction = 3;
 		if (yAbs > 0)
-			dir = 2;
+			direction = 2;
 		if (yAbs < 0)
-			dir = 0;
+			direction = 0;
 		if (!collision(xAbs, yAbs)) {
 			x += xAbs;
 			y += yAbs;
@@ -46,16 +48,6 @@ public abstract class Mob extends Entity {
 			return false;
 		}
 		return true;
-	}
-
-	public void respawn() {
-		level.removeEntity(this);
-		if (respawnTimer == null) {
-			respawnTimer = new GameTimer(respawnTime);
-		} else if (respawnTimer.isTime()) {
-			healthPoints = 10;
-			level.addEntity(this);
-		}
 	}
 
 	public int distance(int x, int y) {

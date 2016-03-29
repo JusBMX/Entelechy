@@ -7,28 +7,30 @@ import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
+import com.boxsmith.level.TileCoordinate;
 
 public class Player extends Mob {
 
 	private Keyboard input;
 	private Mouse mouse;
-	private Sprite sprite;
 	private boolean walking = false;
 	private int anim = 0;
 	private Weapons hands = new Weapons(2, 2000, 16);
 
-	public Player(int x, int y, Keyboard input, Mouse mouse) {
-		this.x = x;
-		this.y = y;
-		this.mouse = mouse;
-		this.input = input;
+	public Player(TileCoordinate spawnpoint) {
+		this.spawnpoint = spawnpoint;
+		x = spawnpoint.getX();
+		y = spawnpoint.getY();
+		mouse = Game.mouse;
+		input = Game.keys;
 		healthPoints = 20;
+		respawnTime = 2000;
 	}
 
 	public void update() {
 		int xA = 0, yA = 0;
 		if (input.attack) {
-			attack(hands, dir);
+			attack(hands, direction);
 		}
 		if (anim < 100) {
 			anim++;
@@ -44,7 +46,7 @@ public class Player extends Mob {
 		if (input.right)
 			xA++;
 		if (Mouse.getButton() == MouseEvent.BUTTON1) {
-			System.out.println(mouse.screenToWorld(Game.screen)[1]);
+			System.out.println("Mouse Y: " + mouse.screenToWorld(Game.screen)[1]);
 		}
 		if (xA != 0 || yA != 0) {
 			move(xA, yA);
@@ -52,12 +54,7 @@ public class Player extends Mob {
 		} else {
 			walking = false;
 		}
-		if(!isAlive()){
-			respawn();
-		}
-
 	}
-
 
 	public void attack(Weapons w, int dir) {
 		int weaponX = x, weaponY = y;
@@ -77,7 +74,6 @@ public class Player extends Mob {
 		}
 		for (Mob m : level.getMobs()) {
 			if (Math.abs(m.x - weaponX) < 8 && Math.abs(m.y - weaponY) < 16 && !m.equals(this)) {
-				System.out.println(w.timer.timeLeft());
 				if (w.timer.isTime()) {
 					m.healthPoints -= w.damage;
 				}
@@ -87,7 +83,7 @@ public class Player extends Mob {
 
 	public void render(Screen screen) {
 		int flip = 0;
-		if (dir == 0) {
+		if (direction == 0) {
 			sprite = Sprite.player_forward;
 			if (walking) {
 				if (anim % 25 > 10) {
@@ -97,11 +93,11 @@ public class Player extends Mob {
 				}
 			}
 		}
-		if (dir == 1)
+		if (direction == 1)
 			sprite = Sprite.player_side;
-		if (dir == 2)
+		if (direction == 2)
 			sprite = Sprite.player_back;
-		if (dir == 3) {
+		if (direction == 3) {
 			sprite = Sprite.player_side;
 			flip = 1;
 		}
