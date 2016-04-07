@@ -11,22 +11,11 @@ public abstract class Entity {
 	protected Level level;
 	protected Random random;
 	protected TileCoordinate spawnpoint;
-	private boolean removed;
+	//private boolean removed;
 
 	public abstract void update();
 	
-	public void remove(){
-		removed = true;
-	}
-	
-	public boolean isRemove(){
-		return removed;
-	}
 
-	public void add(){
-		removed = false;
-	}
-	
 	public abstract void render(Screen screen);
 
 	public void intit(Level level) {

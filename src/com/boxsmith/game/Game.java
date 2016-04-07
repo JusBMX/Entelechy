@@ -13,10 +13,11 @@ import com.boxsmith.gfx.Screen;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
 import com.boxsmith.level.Level;
+import com.boxsmith.skills.Skill;
 
 public class Game extends Canvas implements Runnable {
 
-	public static int width = 600;
+	public static int width = 720;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
 
@@ -83,8 +84,7 @@ public class Game extends Canvas implements Runnable {
 		int xScroll = level.getPlayer().x - screen.width / 2;
 		int yScroll = level.getPlayer().y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
-		//screen.renderText("X:"+ player.x + ", Y:" + player.y, 0, 0, false);
-		//screen.renderText("X:"+ mouse.screenToWorld(screen)[0] + ", Y:" + mouse.screenToWorld(screen)[1] , 0, 10, false);
+		screen.renderText("Hp: " + level.getPlayer().healthPoints + " Attack: " + (Skill.skills[0]).getLevel(), 0, 0, false);
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}

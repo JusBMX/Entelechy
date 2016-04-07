@@ -6,7 +6,6 @@ import java.util.List;
 import com.boxsmith.entity.Entity;
 import com.boxsmith.entity.Mob;
 import com.boxsmith.entity.Player;
-import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.level.tile.Tile;
 
@@ -39,28 +38,11 @@ public abstract class Level {
 	}
 
 	public void update() {
-		respawnHandler();
-
 		for (Entity e : entities) {
-			if (!e.isRemove())
-				e.update();
+			e.update();
 		}
 	}
 
-	public void respawnHandler() {
-		for (Mob m : getMobs()) {
-			if (!m.isAlive()) {
-				if (m.respawnTimer == null) {
-					m.respawnTimer = new GameTimer(m.respawnTime);
-					m.remove();
-				} else if (m.respawnTimer.isTime()) {
-					m.respawnTimer = null;
-					m.add();
-					m.healthPoints = 2;
-				}
-			}
-		}
-	}
 
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
@@ -74,8 +56,7 @@ public abstract class Level {
 			}
 		}
 		for (Entity e : entities) {
-			if (!e.isRemove())
-				e.render(screen);
+			e.render(screen);
 		}
 	}
 
@@ -97,10 +78,10 @@ public abstract class Level {
 		return mobs;
 	}
 
-	public Entity getPlayer() {
+	public Player getPlayer() {
 		for (Entity e : entities) {
 			if (e.getClass().equals(Player.class)) {
-				return e;
+				return (Player) e;
 			}
 		}
 		return null;

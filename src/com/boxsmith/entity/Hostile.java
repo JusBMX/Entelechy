@@ -2,6 +2,7 @@ package com.boxsmith.entity;
 
 import java.util.Random;
 
+import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 import com.boxsmith.level.TileCoordinate;
@@ -11,19 +12,35 @@ public class Hostile extends Mob {
 	private boolean walking = false;
 	private int anim = 0;
 	private Weapons hands = new Weapons(2, 2000, 16);
+	private GameTimer timer = new GameTimer(3000);
+	private int mobLevel;
 
 	public Hostile(TileCoordinate spawnpoint) {
 		this.spawnpoint = spawnpoint;
 		x = spawnpoint.getX();
 		y = spawnpoint.getY();
-		healthPoints = 10;
-		respawnTime = 5000;
+		mobLevel = 2;
+		maxHealthPoints = (int) Math.exp(mobLevel/10) + 10;
+		healthPoints = maxHealthPoints;
+		respawnTime = 2000;
+
 	}
+	
+
 
 	public void update() {
 		int xA = 0, yA = 0;
 		int playerX = level.getPlayer().x;
 		int playerY = level.getPlayer().y;
+		if (!isAlive()) {
+			if (respawnTimer == null) {
+				respawnTimer = new GameTimer(respawnTime);
+			} else if (respawnTimer.isTime()) {
+				respawnTimer = null;
+				respawn();
+			}
+			return;
+		}
 		
 		attack(hands, (Mob) level.getPlayer());
 		
@@ -47,9 +64,9 @@ public class Hostile extends Mob {
 			}
 
 		} else {
-			//if (1 > 480) {
-			//	spawn = new TileCoordinate(ran.nextInt(4) + 2, ran.nextInt(4) + 2);
-			//}
+			if (timer.isTime()) {
+				spawnpoint = new TileCoordinate(ran.nextInt(4) + 2, ran.nextInt(4) + 2);
+			}
 			if (spawnpoint.getX() > x) {
 				xA++;
 			}
@@ -76,8 +93,19 @@ public class Hostile extends Mob {
 		}
 	}
 
+	public void attack(Weapons w, Mob m) {
+		if (distance(m.x, m.y) <= w.range && w.timer.isTime()) {
+			m.healthPoints -= w.damage;
+		}
+	}
+	
 	public void render(Screen screen) {
 		int flip = 0;
+		
+		if (!isAlive()) {
+			return;
+		}
+		
 		if (direction == 0) {
 			sprite = Sprite.man_forward;
 			if (walking) {

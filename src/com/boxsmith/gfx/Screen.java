@@ -62,7 +62,8 @@ public class Screen {
 				int xAbs = xPos + x;
 				if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
 					continue;
-				pixels[xAbs + yAbs * width] = sprite.pixels[x + y * sprite.getWidth()];
+				if(sprite.pixels[x + y * sprite.getWidth()] !=  0xFFFF00FF)
+					pixels[xAbs + yAbs * width] = sprite.pixels[x + y * sprite.getWidth()];
 			}
 		}
 	}
@@ -87,7 +88,7 @@ public class Screen {
 				if (xAbs < 0)
 					xAbs = 0;
 				int color = sprite.pixels[xFlip + yFlip * sprite.getWidth()];
-				if (color != 0xFFFF00FF && color != 0xFF000000)
+				if (color != 0xFFFF00FF)
 					pixels[xAbs + yAbs * width] = color;
 			}
 		}

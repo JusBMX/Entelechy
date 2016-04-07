@@ -36,12 +36,14 @@ public abstract class Mob extends Entity {
 			y += yAbs;
 		}
 	}
-
-	public void attack(Weapons w, Mob m) {
-		if (distance(m.x, m.y) <= w.range && w.timer.isTime()) {
-			m.healthPoints -= w.damage;
-		}
+	
+	public void respawn(){
+		healthPoints = maxHealthPoints;
+		x = spawnpoint.getX();
+		y = spawnpoint.getY();
 	}
+
+
 
 	public boolean isAlive() {
 		if (healthPoints < 1) {
