@@ -7,13 +7,14 @@ public class Keyboard implements KeyListener {
 
 	private boolean[] keys = new boolean[127];
 
-	public boolean up, down, left, right, attack;
+	public boolean up, down, left, right, attack, use;
 
 	public void update() {
 		up = keys[KeyEvent.VK_W];
 		left = keys[KeyEvent.VK_A];
 		down = keys[KeyEvent.VK_S];
 		right = keys[KeyEvent.VK_D];
+		use = keys[KeyEvent.VK_E];
 		attack = keys[KeyEvent.VK_SPACE];
 	}
 

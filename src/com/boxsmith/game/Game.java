@@ -85,6 +85,7 @@ public class Game extends Canvas implements Runnable {
 		int yScroll = level.getPlayer().y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
 		screen.renderText("Hp: " + level.getPlayer().healthPoints + " Attack: " + (Skill.skills[0]).getLevel(), 0, 0, false);
+		screen.renderText(mouse.getX() + " " + mouse.getY(), 0, 50, false);
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}

@@ -68,6 +68,10 @@ public abstract class Level {
 		entities.remove(e);
 	}
 
+	public List<Entity> getEntities(){
+		return entities;
+	}
+	
 	public List<Mob> getMobs() {
 		List<Mob> mobs = new ArrayList<Mob>();
 		for (Entity e : entities) {

@@ -2,16 +2,18 @@ package com.boxsmith.entity;
 
 import java.util.Random;
 
+import com.boxsmith.entity.weapons.Weapon;
 import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
 import com.boxsmith.level.TileCoordinate;
+//import com.boxsmith.level.tile.Interactable;
 
-public class Hostile extends Mob {
+public class Hostile extends Mob implements Interactable{
 	private Random ran = new Random();
 	private boolean walking = false;
 	private int anim = 0;
-	private Weapons hands = new Weapons(2, 2000, 16);
+	private Weapon hands = new Weapon(2, 2000, 16);
 	private GameTimer timer = new GameTimer(3000);
 	private int mobLevel;
 
@@ -22,7 +24,7 @@ public class Hostile extends Mob {
 		mobLevel = 2;
 		maxHealthPoints = (int) Math.exp(mobLevel/10) + 10;
 		healthPoints = maxHealthPoints;
-		respawnTime = 2000;
+		respawnTime = 100000;
 
 	}
 	
@@ -93,7 +95,7 @@ public class Hostile extends Mob {
 		}
 	}
 
-	public void attack(Weapons w, Mob m) {
+	public void attack(Weapon w, Mob m) {
 		if (distance(m.x, m.y) <= w.range && w.timer.isTime()) {
 			m.healthPoints -= w.damage;
 		}
@@ -126,6 +128,22 @@ public class Hostile extends Mob {
 		}
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
 		screen.renderText("Hp: " + healthPoints, x, y - 10, true);
+	}
+
+
+
+	@Override
+	public void action() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -7,18 +7,23 @@ import javax.imageio.ImageIO;
 
 import com.boxsmith.entity.Hostile;
 import com.boxsmith.entity.Player;
+import com.boxsmith.entity.Tree;
 
 public class SpawnLevel extends Level {
 
 	private Player player;
 	private Hostile hostile;
+	private Tree tree;
 
 	public SpawnLevel(String path) {
 		super(path);
+		tree = new Tree(new TileCoordinate(10, 5));
 		player = new Player(new TileCoordinate(10, 10));
 		hostile = new Hostile(new TileCoordinate(5, 5));
+		addEntity(tree);
 		addEntity(hostile);
 		addEntity(player);
+
 		player.intit(this);
 		hostile.intit(this);
 	}

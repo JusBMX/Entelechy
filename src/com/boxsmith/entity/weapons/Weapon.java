@@ -1,9 +1,10 @@
-package com.boxsmith.entity;
+package com.boxsmith.entity.weapons;
 
+import com.boxsmith.entity.Entity;
 import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
 
-public class Weapons extends Entity {
+public class Weapon extends Entity {
 	public int damage, speed, range;
 	public GameTimer timer;
 	
@@ -14,7 +15,7 @@ public class Weapons extends Entity {
 	 * @param speed
 	 * @param range
 	 */
-	public Weapons(int damage, int speed, int range){
+	public Weapon(int damage, int speed, int range){
 		this.range = range;
 		this.damage = damage;
 		this.speed = speed;

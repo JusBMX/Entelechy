@@ -56,15 +56,5 @@ public abstract class Mob extends Entity {
 		return (int) (Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2)));
 	}
 
-	private boolean collision(int xAbs, int yAbs) {
-		boolean soild = false;
-		for (int c = 0; c < 4; c++) {
-			int xt = ((x + xAbs) + c % 2 * 10 - 12) / 16;
-			int yt = ((y + yAbs) + c % 2 * 10 + 4) / 16;
 
-			if (level.getTile(xt, yt).soild())
-				soild = true;
-		}
-		return soild;
-	}
 }

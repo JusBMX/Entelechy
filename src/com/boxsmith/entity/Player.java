@@ -1,6 +1,8 @@
 package com.boxsmith.entity;
 
 import java.awt.event.MouseEvent;
+
+import com.boxsmith.entity.weapons.Weapon;
 import com.boxsmith.game.Game;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.Sprite;
@@ -14,8 +16,7 @@ public class Player extends Mob {
 	private Mouse mouse;
 	private boolean walking = false;
 	private int anim = 0;
-	private Weapons hands = new Weapons(2, 2000, 16);
-
+	private Weapon hands = new Weapon(2, 2000, 16);
 
 	public Player(TileCoordinate spawnpoint) {
 		this.spawnpoint = spawnpoint;
@@ -33,6 +34,9 @@ public class Player extends Mob {
 		if (input.attack) {
 			attack(hands, direction);
 		}
+		if (input.use) {
+			use();
+		}
 		if (anim < 100) {
 			anim++;
 		} else {
@@ -46,8 +50,9 @@ public class Player extends Mob {
 			xA--;
 		if (input.right)
 			xA++;
-		if (Mouse.getButton() == MouseEvent.BUTTON1) { //create a field in Mouse for Button1
-			System.out.println("Mouse Y: " + mouse.screenToWorld(Game.screen)[1]);
+		if (Mouse.getButton() == MouseEvent.BUTTON1) { // create a field in
+														// Mouse for Button1
+			System.out.println("Mouse Y: " + mouse.screenToWorld(Game.screen)[1] + ", Mouse X: " + mouse.screenToWorld(Game.screen)[0]);
 		}
 		if (xA != 0 || yA != 0) {
 			move(xA, yA);
@@ -57,7 +62,7 @@ public class Player extends Mob {
 		}
 	}
 
-	public void attack(Weapons w, int dir) {
+	public void attack(Weapon w, int dir) {
 		int weaponX = x, weaponY = y;
 		switch (dir) {
 		case 0:
@@ -76,10 +81,18 @@ public class Player extends Mob {
 		for (Mob m : level.getMobs()) {
 			if (Math.abs(m.x - weaponX) < 8 && Math.abs(m.y - weaponY) < 16 && !m.equals(this)) {
 				if (w.timer.isTime()) {
-					m.healthPoints -= w.damage + Skill.skills[0].getLevel();
+					int totalDamge = w.damage + Skill.skills[0].getLevel();
+					m.healthPoints -= totalDamge;
+					if (m.healthPoints - totalDamge < 1) {
+						// Skill.skills[0];
+					}
 				}
 			}
 		}
+	}
+
+	public void use() {
+
 	}
 
 	public void render(Screen screen) {
@@ -105,4 +118,5 @@ public class Player extends Mob {
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
 
 	}
+
 }

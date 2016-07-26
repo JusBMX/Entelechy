@@ -14,6 +14,8 @@ public class Sprite {
 	public static Sprite dirt = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
+	public static Sprite tree = new Sprite(32, 32, 0, 1, SpriteSheet.tiles);
+
 	public static Sprite player_forward = new Sprite(32, 16, 0, 7, SpriteSheet.tiles);
 	public static Sprite player_back = new Sprite(32, 16, 1, 7, SpriteSheet.tiles);
 	public static Sprite player_side = new Sprite(32, 16, 2, 7, SpriteSheet.tiles);

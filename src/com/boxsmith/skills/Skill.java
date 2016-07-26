@@ -2,7 +2,7 @@ package com.boxsmith.skills;
 
 public abstract class Skill {
 	public int expoints;
-	public static Skill[] skills = new Skill[]{new Attack(), new Health()};
+	public static Skill[] skills = new Skill[]{new Attack(), new Health(), new Woodcutting()};
 
 	public int getLevel() {
 		return (int) Math.sqrt(expoints) + 1;
@@ -11,5 +11,7 @@ public abstract class Skill {
 	public static int levelToExp(int level) {
 		return (int) Math.pow(level, 2);
 	}
+	
+	//public abstract void addExpoints<E>(E e);
 	
 }
