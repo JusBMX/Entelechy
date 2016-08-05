@@ -1,4 +1,4 @@
-package com.boxsmith.level.tile;
+package com.boxsmith.entity;
 
 public interface Interactable {
 	public void action();
