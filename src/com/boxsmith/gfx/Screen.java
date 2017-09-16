@@ -1,16 +1,18 @@
 package com.boxsmith.gfx;
 
+import com.boxsmith.gfx.sprite.*;
 import com.boxsmith.level.tile.Tile;
 
 public class Screen {
 
-	public int width, height;
-	public final int MAP_SIZE = 64;
-	public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
+	public final int width, height;
+
 	public int[] pixels;
+
 	public int xOffset;
 	public int yOffset;
-	private static String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890.:-";
+
+	private static final String FONT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890.:-";
 
 	public Screen(int width, int height) {
 		this.width = width;
@@ -23,12 +25,11 @@ public class Screen {
 			pixels[i] = 0xA00000;
 		}
 	}
-	
 
 	public void renderText(String msg, int x, int y, boolean fixed) {
 		msg = msg.toUpperCase();
 		for (int i = 0; i < msg.length(); i++) {
-			int charIndex = chars.indexOf(msg.charAt(i));
+			int charIndex = FONT.indexOf(msg.charAt(i));
 			if (charIndex >= 0) {
 				renderSprite(x + (i * 8), y, new Sprite(8, charIndex % 16, charIndex / 16, SpriteSheet.font), fixed);
 			}
@@ -38,15 +39,15 @@ public class Screen {
 	public void renderTile(int xPos, int yPos, Tile tile) {
 		xPos -= xOffset;
 		yPos -= yOffset;
-		for (int y = 0; y < tile.sprite.SIZE; y++) {
+		for (int y = 0; y < tile.sprite.getDimension(); y++) {
 			int yAbs = yPos + y;
-			for (int x = 0; x < tile.sprite.SIZE; x++) {
+			for (int x = 0; x < tile.sprite.getDimension(); x++) {
 				int xAbs = xPos + x;
-				if (xAbs < -tile.sprite.SIZE || xAbs >= width || yAbs < 0 || yAbs >= height)
+				if (xAbs < -tile.sprite.getDimension() || xAbs >= width || yAbs < 0 || yAbs >= height)
 					break;
 				if (xAbs < 0)
 					xAbs = 0;
-				pixels[xAbs + yAbs * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+				pixels[xAbs + yAbs * width] = tile.sprite.getPixels()[x + y * tile.sprite.getDimension()];
 			}
 		}
 	}
@@ -62,8 +63,25 @@ public class Screen {
 				int xAbs = xPos + x;
 				if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
 					continue;
-				if(sprite.pixels[x + y * sprite.getWidth()] !=  0xFFFF00FF)
-					pixels[xAbs + yAbs * width] = sprite.pixels[x + y * sprite.getWidth()];
+				if(sprite.getPixels()[x + y * sprite.getWidth()] !=  0xFFFF00FF)
+					pixels[xAbs + yAbs * width] = sprite.getPixels()[x + y * sprite.getWidth()];
+			}
+		}
+	}
+
+	public void renderAn(int xPos, int yPos, SpriteAnimation animation, boolean fixed) {
+		if (fixed) {
+			xPos -= xOffset;
+			yPos -= yOffset;
+		}
+		for (int y = 0; y < animation.getHeight(); y++) {
+			int yAbs = yPos + y;
+			for (int x = 0; x < animation.getWidth(); x++) {
+				int xAbs = xPos + x;
+				if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
+					continue;
+				if(animation.getPixels()[x + y * animation.getWidth()] !=  0xFFFF00FF)
+					pixels[xAbs + yAbs * width] = animation.getPixels()[x + y * animation.getWidth()];
 			}
 		}
 	}
@@ -87,7 +105,7 @@ public class Screen {
 					break;
 				if (xAbs < 0)
 					xAbs = 0;
-				int color = sprite.pixels[xFlip + yFlip * sprite.getWidth()];
+				int color = sprite.getPixels()[xFlip + yFlip * sprite.getWidth()];
 				if (color != 0xFFFF00FF)
 					pixels[xAbs + yAbs * width] = color;
 			}

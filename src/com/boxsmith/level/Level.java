@@ -11,18 +11,17 @@ import com.boxsmith.level.tile.Tile;
 
 public abstract class Level {
 
-	protected int width, height;
-	protected int[] tilesInt;
-	protected int[] tiles;
+	int width, height;
+	int[] tiles;
 
-	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Entity> entities = new ArrayList<>();
 
 	public static Level spawnlevel = new SpawnLevel("/Textures/Levels/SLevel.png");
 
 	public Level(int width, int height) {
 		this.height = height;
 		this.width = width;
-		tilesInt = new int[width * height];
+		tiles = new int[width * height];
 		generateLevel();
 	}
 

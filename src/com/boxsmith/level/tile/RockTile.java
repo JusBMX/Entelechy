@@ -1,7 +1,7 @@
 package com.boxsmith.level.tile;
 
 import com.boxsmith.gfx.Screen;
-import com.boxsmith.gfx.Sprite;
+import com.boxsmith.gfx.sprite.Sprite;
 
 public class RockTile extends Tile {
 

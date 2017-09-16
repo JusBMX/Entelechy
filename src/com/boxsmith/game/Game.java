@@ -7,71 +7,59 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
+import com.boxsmith.gfx.sprite.SpriteAnimation;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
-import com.boxsmith.level.Level;
-import com.boxsmith.skills.Skill;
 
 public class Game extends Canvas implements Runnable {
 
-	public static int width = 720;
-	public static int height = width / 16 * 9;
-	public static int scale = 3;
+	// Game Settings
+    public static int width = 720;
+    public static int height = width / 16 * 9;
+    public static final int SCALE = 2;
 
-	private static final long serialVersionUID = 1L;
 	private boolean running = false;
+    private JFrame frame;
 
+    // Image data
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	private Thread thread;
-	private JFrame frame;
-	public static Screen screen;
-	private Level level;
+    public static Screen screen;
 	public static Keyboard keys;
 	public static Mouse mouse;
 
 
-	public Game() {
-		Dimension resolution = new Dimension(width * scale, height * scale);
+	private Game() {
+		Dimension resolution = new Dimension(width * SCALE, height * SCALE);
 		screen = new Screen(width, height);
 		keys = new Keyboard();
 		mouse = new Mouse();
 
-		level = Level.spawnlevel;
-
-		frame = new JFrame("Game");
+		frame = new JFrame("Entelechy");
 		frame.setPreferredSize(resolution);
 		frame.add(this);
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
 		addKeyListener(keys);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 	}
 
-	public synchronized void start() {
+	private synchronized void start() {
 		running = true;
-		thread = new Thread(this, "Game");
+        Thread thread = new Thread(this, "Game");
 		thread.start();
 	}
 
-	public synchronized void stop() {
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void tick() {
+	private void tick() {
 		keys.update();
-		level.update();
+		SpriteAnimation.test.tick();
 	}
 
 	public void render() {
@@ -80,12 +68,10 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
+
 		screen.clear();
-		int xScroll = level.getPlayer().x - screen.width / 2;
-		int yScroll = level.getPlayer().y - screen.height / 2;
-		level.render(xScroll, yScroll, screen);
-		screen.renderText("Hp: " + level.getPlayer().healthPoints + " Attack: " + (Skill.skills[0]).getLevel(), 0, 0, false);
-		screen.renderText(mouse.getX() + " " + mouse.getY(), 0, 50, false);
+		screen.renderAn(1,1, SpriteAnimation.test, false);
+
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}

@@ -1,8 +1,7 @@
 package com.boxsmith.entity;
 
-import com.boxsmith.game.GameTimer;
 import com.boxsmith.gfx.Screen;
-import com.boxsmith.gfx.Sprite;
+import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.level.TileCoordinate;
 
 public abstract class Mob extends Entity {
@@ -10,7 +9,7 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	protected boolean moving = false;
 	public int direction, healthPoints, maxHealthPoints, respawnTime;
-	public GameTimer respawnTimer;
+
 	public TileCoordinate spawnpoint;
 
 	public abstract void update();

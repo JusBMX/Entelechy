@@ -55,8 +55,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
 		mouseButton = -1;
 	}
 
-	public int[] screenToWorld(Screen screen) {
-		int[] coords = { screen.xOffset + mouseX/Game.scale, screen.yOffset + mouseY/Game.scale };
+	public int[] screenToWorld() {
+		int[] coords = { Game.screen.xOffset + mouseX/Game.SCALE, Game.screen.yOffset + mouseY/Game.SCALE };
 		return coords;
 	}
 
