@@ -17,7 +17,7 @@ import com.boxsmith.input.Mouse;
 public class Game extends Canvas implements Runnable {
 
 	// Game Settings
-    public static int width = 720;
+    public static int width = 480;
     public static int height = width / 16 * 9;
     public static final int SCALE = 2;
 
@@ -39,16 +39,16 @@ public class Game extends Canvas implements Runnable {
 		keys = new Keyboard();
 		mouse = new Mouse();
 
+		setPreferredSize(resolution); // <-- DON'T F****** CHANGE. EVERYTHING WITH THE MOUSE LOCATION WILL BREAK.
+		addKeyListener(keys);
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+
 		frame = new JFrame("Entelechy");
-		frame.setPreferredSize(resolution);
 		frame.add(this);
 		frame.pack();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-
-		addKeyListener(keys);
-		addMouseListener(mouse);
-		addMouseMotionListener(mouse);
 	}
 
 	private synchronized void start() {
@@ -70,7 +70,10 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		screen.renderAn(1,1, SpriteAnimation.test, false);
+
+		screen.renderAnimation(0,0,SpriteAnimation.test, false);
+		screen.renderText("Hello World!", 10, 50, false);
+		screen.renderPoint(mouse.screenToWorld(false)[0],mouse.screenToWorld(false)[1],0x0000FF,false);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

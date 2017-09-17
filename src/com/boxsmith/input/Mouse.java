@@ -35,17 +35,11 @@ public class Mouse implements MouseListener, MouseMotionListener {
 		mouseY = e.getY();
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(MouseEvent e) {}
 
-	}
-
-	public void mouseExited(MouseEvent e) {
-
-	}
+	public void mouseExited(MouseEvent e) {}
 
 	public void mousePressed(MouseEvent e) {
 		mouseButton = e.getButton();
@@ -55,8 +49,10 @@ public class Mouse implements MouseListener, MouseMotionListener {
 		mouseButton = -1;
 	}
 
-	public int[] screenToWorld() {
-		int[] coords = { Game.screen.xOffset + mouseX/Game.SCALE, Game.screen.yOffset + mouseY/Game.SCALE };
+	public int[] screenToWorld(Boolean withScreenOffset) {
+		int xOffset = withScreenOffset ? Game.screen.xOffset : 0;
+		int yOffset = withScreenOffset ? Game.screen.yOffset : 0;
+		int[] coords = {xOffset + mouseX / Game.SCALE, yOffset + mouseY / Game.SCALE};
 		return coords;
 	}
 

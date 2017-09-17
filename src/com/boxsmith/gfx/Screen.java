@@ -1,41 +1,69 @@
 package com.boxsmith.gfx;
 
 import com.boxsmith.gfx.sprite.*;
+import com.boxsmith.gfx.ui.components.Button;
 import com.boxsmith.level.tile.Tile;
 
 public class Screen {
 
-	public final int width, height;
+	public final int width, height; // Rendering resolution.
+	public int xOffset, yOffset; // Screen offsets.
+	public int[] pixels; // Pixel data.
 
-	public int[] pixels;
+	private static final String FONT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890.:-"; // Used for mapping in game text.
 
-	public int xOffset;
-	public int yOffset;
-
-	private static final String FONT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890.:-";
-
+	/**
+	 * Creates a new canvas for rendering graphics.
+	 * @param width The number of pixels horizontally.
+	 * @param height The number of pixels vertically.
+	 */
 	public Screen(int width, int height) {
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];
 	}
 
+	/**
+	 * Clears the screen of old color data with the color red.
+	 */
 	public void clear() {
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0xA00000;
+			pixels[i] = 0x550000;
 		}
 	}
 
-	public void renderText(String msg, int x, int y, boolean fixed) {
-		msg = msg.toUpperCase();
-		for (int i = 0; i < msg.length(); i++) {
-			int charIndex = FONT.indexOf(msg.charAt(i));
+	/**
+	 * Renders text. Font sprites must be 8x8 pixels.
+	 * @param message The text to be render.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param fixedToWorld True to use world coordinates. False to use screen coordinates.
+	 */
+	public void renderText(String message, int x, int y, boolean fixedToWorld) {
+		message = message.toUpperCase();
+		for (int i = 0; i < message.length(); i++) {
+			int charIndex = FONT.indexOf(message.charAt(i));
 			if (charIndex >= 0) {
-				renderSprite(x + (i * 8), y, new Sprite(8, charIndex % 16, charIndex / 16, SpriteSheet.font), fixed);
+				renderSprite(x + (i * 8), y,
+						new Sprite(8, (charIndex % 16) * 8,(charIndex / 16) * 8, SpriteSheet.font),
+						fixedToWorld);
 			}
 		}
 	}
 
+	public void renderButton(int xPos, int yPos, Button button, boolean fixedToWorld){
+		button.x = xPos;
+		button.y = yPos;
+		renderSprite(xPos, yPos, button.sprite, fixedToWorld);
+		renderText(button.text, xPos, yPos, fixedToWorld);
+	}
+
+	/**
+	 * Renders a world tile. Only renders tiles visible on the screen.
+	 * @param xPos The x coordinate.
+	 * @param yPos The y coordinate.
+	 * @param tile The tile to render.
+	 */
 	public void renderTile(int xPos, int yPos, Tile tile) {
 		xPos -= xOffset;
 		yPos -= yOffset;
@@ -52,8 +80,15 @@ public class Screen {
 		}
 	}
 
-	public void renderSprite(int xPos, int yPos, Sprite sprite, boolean fixed) {
-		if (fixed) {
+	/**
+	 * Renders a sprite to the screen.
+	 * @param xPos The x coordinate.
+	 * @param yPos The y coordinate.
+	 * @param sprite The sprite to render.
+	 * @param fixedToWorld True to use world coordinates. False to use screen coordinates.
+	 */
+	public void renderSprite(int xPos, int yPos, Sprite sprite, boolean fixedToWorld) {
+		if (fixedToWorld) {
 			xPos -= xOffset;
 			yPos -= yOffset;
 		}
@@ -69,23 +104,24 @@ public class Screen {
 		}
 	}
 
-	public void renderAn(int xPos, int yPos, SpriteAnimation animation, boolean fixed) {
-		if (fixed) {
-			xPos -= xOffset;
-			yPos -= yOffset;
-		}
-		for (int y = 0; y < animation.getHeight(); y++) {
-			int yAbs = yPos + y;
-			for (int x = 0; x < animation.getWidth(); x++) {
-				int xAbs = xPos + x;
-				if (xAbs < 0 || xAbs >= width || yAbs < 0 || yAbs >= height)
-					continue;
-				if(animation.getPixels()[x + y * animation.getWidth()] !=  0xFFFF00FF)
-					pixels[xAbs + yAbs * width] = animation.getPixels()[x + y * animation.getWidth()];
-			}
-		}
+	/**
+	 * Renders a animation to the screen.
+	 * @param xPos The x coordinate.
+	 * @param yPos The y coordinate.
+	 * @param animation The sprite to render.
+	 * @param fixedToWorld True to use world coordinates. False to use screen coordinates.
+	 */
+	public void renderAnimation(int xPos, int yPos, SpriteAnimation animation, boolean fixedToWorld) {
+		renderSprite(xPos, yPos, animation.getCurrentFrame(), fixedToWorld);
 	}
 
+	/**
+	 * Renders the player to the screen.
+	 * @param xPos The x coordinate.
+	 * @param yPos The y coordinate.
+	 * @param sprite The sprite to render.
+	 * @param flip Rotate the sprite.
+	 */
 	public void renderPlayer(int xPos, int yPos, Sprite sprite, int flip) {
 		xPos -= xOffset;
 		yPos -= yOffset;
@@ -112,6 +148,23 @@ public class Screen {
 		}
 	}
 
+
+	public void renderPoint(int xPos, int yPos, int color, boolean fixedToWorld){
+		if (fixedToWorld) {
+			xPos -= xOffset;
+			yPos -= yOffset;
+		}
+		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height){
+			return;
+		}
+		pixels[xPos + yPos * width] = color;
+	}
+
+	/**
+	 * Sets both x and y offsets. (Moves the 'camera' around the world)
+	 * @param xOffset The x offset.
+	 * @param yOffset The y offset.
+	 */
 	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

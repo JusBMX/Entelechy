@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Entelechy.iml" filepath="$PROJECT_DIR$/Entelechy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Vivacity/Vivacity.iml" filepath="$PROJECT_DIR$/../Vivacity/Vivacity.iml" />
     </modules>
   </component>
 </project>

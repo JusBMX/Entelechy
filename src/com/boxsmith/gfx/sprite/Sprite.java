@@ -116,6 +116,6 @@ public class Sprite {
      * @return A copy of the pixel array. This way the array is immutable outside the class.
      */
     public int[] getPixels(){
-        return pixels.clone();
+        return pixels;
     }
 }

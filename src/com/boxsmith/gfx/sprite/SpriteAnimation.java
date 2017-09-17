@@ -12,8 +12,6 @@ public class SpriteAnimation {
     private int currentFrame; // The current frame in the animation.
     private Sprite[] frames; // The sprites that make up the animation.
 
-    private int[] pixels; // PNG pixel data for the current frame in the animation.
-
     private int delayCount = 0; // Counter
     private int delay = 5; // The number of ticks to display the frame.
 
@@ -28,7 +26,6 @@ public class SpriteAnimation {
      * @param length The number of frames in the animation.
      */
     public SpriteAnimation(int dimension, int x, int y, SpriteSheet sheet, int length) {
-        pixels = new int[dimension * dimension];
         this.dimension = dimension;
         this.width = dimension;
         this.height = dimension;
@@ -49,12 +46,12 @@ public class SpriteAnimation {
      * @param length The number of frames in the animation.
      */
     public SpriteAnimation(int height, int width, int x, int y, SpriteSheet sheet, int length) {
-        pixels = new int[height * width];
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
         this.sheet = sheet;
+        this.length = length;
         load();
     }
 
@@ -67,7 +64,6 @@ public class SpriteAnimation {
             currentFrame = (currentFrame + 1) % length;
         }
         delayCount++;
-        pixels = frames[currentFrame].getPixels();
     }
 
     /**
@@ -105,17 +101,17 @@ public class SpriteAnimation {
     }
 
     /**
-     * @return A copy of the pixel array. This way the array is immutable outside the class.
-     */
-    public int[] getPixels(){
-        return pixels.clone();
-    }
-
-    /**
      * @return The dimension of the sprite in pixels. Returns <code>null</code> if width and height are not equal.
      */
     public int getDimension(){
         return dimension;
+    }
+
+    /**
+     * @return The current frame (sprite) of the animation.
+     */
+    public Sprite getCurrentFrame(){
+        return frames[currentFrame];
     }
 
 }
