@@ -15,7 +15,7 @@ public class SpriteAnimation {
     private int delayCount = 0; // Counter
     private int delay = 5; // The number of ticks to display the frame.
 
-    public static SpriteAnimation test = new SpriteAnimation(16, 0,0,SpriteSheet.tiles, 50);
+    public static SpriteAnimation test = new SpriteAnimation(16, 0,128,SpriteSheet.tiles, 6).setDelay(10);
 
     /**
      * Creates an animation with sprites with the same width and height.
@@ -96,8 +96,9 @@ public class SpriteAnimation {
      * Sets how long each frame of the animation is render. (5 is default)
      * @param delay the number of ticks to render each frame.
      */
-    public void setDelay(int delay){
+    public SpriteAnimation setDelay(int delay){
         this.delay = delay;
+        return this;
     }
 
     /**

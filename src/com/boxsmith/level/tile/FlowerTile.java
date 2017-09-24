@@ -15,7 +15,7 @@ public class FlowerTile extends Tile {
 	}
 
 	@Override
-	public boolean soild() {
+	public boolean solid() {
 		return false;
 	}
 

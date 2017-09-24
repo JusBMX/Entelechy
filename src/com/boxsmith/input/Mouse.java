@@ -5,7 +5,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import com.boxsmith.game.Game;
-import com.boxsmith.gfx.Screen;
 
 public class Mouse implements MouseListener, MouseMotionListener {
 
@@ -35,7 +34,9 @@ public class Mouse implements MouseListener, MouseMotionListener {
 		mouseY = e.getY();
 	}
 
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		Game.main.mouseClick();
+	}
 
 	public void mouseEntered(MouseEvent e) {}
 
@@ -49,7 +50,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 		mouseButton = -1;
 	}
 
-	public int[] screenToWorld(Boolean withScreenOffset) {
+	public static int[] screenToWorld(Boolean withScreenOffset) {
 		int xOffset = withScreenOffset ? Game.screen.xOffset : 0;
 		int yOffset = withScreenOffset ? Game.screen.yOffset : 0;
 		int[] coords = {xOffset + mouseX / Game.SCALE, yOffset + mouseY / Game.SCALE};

@@ -16,8 +16,6 @@ public abstract class Level {
 
 	private List<Entity> entities = new ArrayList<>();
 
-	public static Level spawnlevel = new SpawnLevel("/Textures/Levels/SLevel.png");
-
 	public Level(int width, int height) {
 		this.height = height;
 		this.width = width;
@@ -30,18 +28,15 @@ public abstract class Level {
 		generateLevel();
 	}
 
-	protected void loadLevel(String path) {
-	}
+	protected abstract void loadLevel(String path);
 
-	protected void generateLevel() {
-	}
+	protected abstract void generateLevel();
 
 	public void update() {
 		for (Entity e : entities) {
 			e.update();
 		}
 	}
-
 
 	public void render(int xScroll, int yScroll, Screen screen) {
 		screen.setOffset(xScroll, yScroll);
@@ -57,6 +52,10 @@ public abstract class Level {
 		for (Entity e : entities) {
 			e.render(screen);
 		}
+	}
+
+	public void render(Screen screen){
+		render(0, 0, screen);
 	}
 
 	public void addEntity(Entity e) {

@@ -1,33 +1,34 @@
 package com.boxsmith.gfx.ui.components;
 
+import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
 
 public class Button extends Component {
 
-    private int width, height;
-    public String text;
+    private String text;
 
-    public static Button start = new Button(Sprite.rock, "Start");
-
-    public Button(Sprite sprite, String text) {
+    public Button(Sprite sprite, String text, int x, int y) {
         this.width = sprite.getWidth();
         this.height = sprite.getHeight();
         this.text = text;
-        super.sprite = sprite;
+        this.sprite = sprite;
+        this.x = x;
+        this.y = y;
     }
 
-    public Button(Sprite sprite) {
+    public Button(Sprite sprite, int x, int y) {
         this.width = sprite.getWidth();
         this.height = sprite.getHeight();
         this.text = "";
-        super.sprite = sprite;
+        this.sprite = sprite;
+        this.x = x;
+        this.y = y;
     }
 
-    public Button onButton(int[] coord) {
-        if ((coord[0] >= x && coord[0] <= x + width) && (coord[1] >= y && coord[1] <= y + height)) {
-            return this;
-        }
-        return null;
+    @Override
+    public void render(Screen screen){
+        screen.renderSprite(x, y, sprite, false);
+        screen.renderText(text, x - (text.length() * 4) / 2, y + 4, false);
     }
 
 }

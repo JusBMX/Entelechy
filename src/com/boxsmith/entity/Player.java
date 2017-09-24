@@ -6,7 +6,7 @@ import com.boxsmith.game.Game;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.input.*;
-import com.boxsmith.level.TileCoordinate;
+import com.boxsmith.level.tile.TileCoordinate;
 
 public class Player extends Mob {
 
@@ -19,16 +19,15 @@ public class Player extends Mob {
 		this.spawnpoint = spawnpoint;
 		x = spawnpoint.getX();
 		y = spawnpoint.getY();
-		input = Game.keys;
 
+		maxHealthPoints = 10;
 		healthPoints = maxHealthPoints;
 		respawnTime = 2000;
 	}
 
 	public void update() {
 		int xA = 0, yA = 0;
-		if (input.attack) {
-		}
+		input = Game.keys;
 		if (input.use) {
 			use();
 		}

@@ -1,7 +1,6 @@
 package com.boxsmith.gfx;
 
 import com.boxsmith.gfx.sprite.*;
-import com.boxsmith.gfx.ui.components.Button;
 import com.boxsmith.level.tile.Tile;
 
 public class Screen {
@@ -51,19 +50,13 @@ public class Screen {
 		}
 	}
 
-	public void renderButton(int xPos, int yPos, Button button, boolean fixedToWorld){
-		button.x = xPos;
-		button.y = yPos;
-		renderSprite(xPos, yPos, button.sprite, fixedToWorld);
-		renderText(button.text, xPos, yPos, fixedToWorld);
-	}
-
 	/**
 	 * Renders a world tile. Only renders tiles visible on the screen.
 	 * @param xPos The x coordinate.
 	 * @param yPos The y coordinate.
 	 * @param tile The tile to render.
 	 */
+	@Deprecated
 	public void renderTile(int xPos, int yPos, Tile tile) {
 		xPos -= xOffset;
 		yPos -= yOffset;
@@ -122,6 +115,7 @@ public class Screen {
 	 * @param sprite The sprite to render.
 	 * @param flip Rotate the sprite.
 	 */
+	@Deprecated
 	public void renderPlayer(int xPos, int yPos, Sprite sprite, int flip) {
 		xPos -= xOffset;
 		yPos -= yOffset;
@@ -148,7 +142,13 @@ public class Screen {
 		}
 	}
 
-
+	/**
+	 * Renders a 1x1 pixel point on the screen.
+	 * @param xPos The x coordinate.
+	 * @param yPos The y coordinate.
+	 * @param color The color of the dot.
+	 * @param fixedToWorld True to use world coordinates. False to use screen coordinates.
+	 */
 	public void renderPoint(int xPos, int yPos, int color, boolean fixedToWorld){
 		if (fixedToWorld) {
 			xPos -= xOffset;

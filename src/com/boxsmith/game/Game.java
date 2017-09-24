@@ -11,8 +11,12 @@ import javax.swing.*;
 
 import com.boxsmith.gfx.sprite.SpriteAnimation;
 import com.boxsmith.gfx.Screen;
+import com.boxsmith.gfx.ui.menus.Main;
+import com.boxsmith.gfx.ui.menus.Menu;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
+import com.boxsmith.level.Level;
+import com.boxsmith.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -32,6 +36,8 @@ public class Game extends Canvas implements Runnable {
 	public static Keyboard keys;
 	public static Mouse mouse;
 
+	public static Menu main = new Main();
+	public static Level spawnlevel = new SpawnLevel("/Textures/Levels/SpawnGroundTiles.png");
 
 	private Game() {
 		Dimension resolution = new Dimension(width * SCALE, height * SCALE);
@@ -60,6 +66,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		keys.update();
 		SpriteAnimation.test.tick();
+		spawnlevel.update();
 	}
 
 	public void render() {
@@ -71,9 +78,11 @@ public class Game extends Canvas implements Runnable {
 
 		screen.clear();
 
+		spawnlevel.render(0,0, screen);
 		screen.renderAnimation(0,0,SpriteAnimation.test, false);
 		screen.renderText("Hello World!", 10, 50, false);
 		screen.renderPoint(mouse.screenToWorld(false)[0],mouse.screenToWorld(false)[1],0x0000FF,false);
+		main.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

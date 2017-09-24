@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 
 import com.boxsmith.entity.Player;
+import com.boxsmith.level.tile.TileCoordinate;
 
 public class SpawnLevel extends Level {
 

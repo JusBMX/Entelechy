@@ -2,11 +2,13 @@ package com.boxsmith.level.tile;
 
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
+import com.boxsmith.gfx.sprite.SpriteAnimation;
 
 public abstract class Tile {
 
 	public int x, y;
 	public Sprite sprite;
+	public SpriteAnimation spriteAnimation;
 
 	public static Tile grassTile = new GrassTile(Sprite.grass);
 	public static Tile rockTile = new RockTile(Sprite.rock);
@@ -21,7 +23,11 @@ public abstract class Tile {
 		this.sprite = sprite;
 	}
 
+	public Tile (SpriteAnimation spriteAnimation) {
+		this.spriteAnimation = spriteAnimation;
+	}
+
 	public abstract void render(int x, int y, Screen screen);
 
-	public abstract boolean soild();
+	public abstract boolean solid();
 }
