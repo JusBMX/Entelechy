@@ -5,15 +5,15 @@ import com.boxsmith.gfx.ui.components.Button;
 
 public class Main extends Menu {
 
-    private Button start = new Button(Sprite.rock, "Start", 10, 100);
+    private Button start = new Button(Sprite.ROCK, Sprite.GRASS, "Start", 10, 100);
 
     public Main(){
         add(start);
     }
 
     public void mouseClick(){
-        if (findComponentAt() == start){
-            System.out.println("gg");
+        if (findComponentAtMouse() == start){
+            System.out.println("Start");
         }
     }
 

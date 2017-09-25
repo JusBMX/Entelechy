@@ -44,14 +44,14 @@ public class Screen {
 			int charIndex = FONT.indexOf(message.charAt(i));
 			if (charIndex >= 0) {
 				renderSprite(x + (i * 8), y,
-						new Sprite(8, (charIndex % 16) * 8,(charIndex / 16) * 8, SpriteSheet.font),
+						new Sprite(8, (charIndex % 16) * 8,(charIndex / 16) * 8, SpriteSheet.FONT),
 						fixedToWorld);
 			}
 		}
 	}
 
 	/**
-	 * Renders a world tile. Only renders tiles visible on the screen.
+	 * Renders a world tile. Only renders TILES visible on the screen.
 	 * @param xPos The x coordinate.
 	 * @param yPos The y coordinate.
 	 * @param tile The tile to render.

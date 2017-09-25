@@ -10,10 +10,10 @@ public abstract class Tile {
 	public Sprite sprite;
 	public SpriteAnimation spriteAnimation;
 
-	public static Tile grassTile = new GrassTile(Sprite.grass);
-	public static Tile rockTile = new RockTile(Sprite.rock);
-	public static Tile dirtTile = new FlowerTile(Sprite.dirt);
-	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
+	public static Tile grassTile = new GrassTile(Sprite.GRASS);
+	public static Tile rockTile = new RockTile(Sprite.ROCK);
+	public static Tile dirtTile = new FlowerTile(Sprite.DIRT);
+	public static Tile voidTile = new VoidTile(Sprite.VOID_SPRITE);
 
 	public final static int COL_GRASS = 0xFF00FF00;
 	public final static int COL_ROCK = 0xFFFF0000;

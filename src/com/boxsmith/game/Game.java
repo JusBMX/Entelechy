@@ -67,6 +67,7 @@ public class Game extends Canvas implements Runnable {
 		keys.update();
 		SpriteAnimation.test.tick();
 		spawnlevel.update();
+		main.tick();
 	}
 
 	public void render() {

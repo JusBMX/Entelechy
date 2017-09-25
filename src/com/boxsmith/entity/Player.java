@@ -63,21 +63,21 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		int flip = 0;
 		if (direction == 0) {
-			sprite = Sprite.player_forward;
+			sprite = Sprite.PLAYER_FORWARD;
 			if (walking) {
 				if (anim % 25 > 10) {
-					sprite = Sprite.player_forward;
+					sprite = Sprite.PLAYER_FORWARD;
 				} else {
 					flip = 1;
 				}
 			}
 		}
 		if (direction == 1)
-			sprite = Sprite.player_side;
+			sprite = Sprite.PLAYER_SIDE;
 		if (direction == 2)
-			sprite = Sprite.player_back;
+			sprite = Sprite.PLAYER_BACK;
 		if (direction == 3) {
-			sprite = Sprite.player_side;
+			sprite = Sprite.PLAYER_SIDE;
 			flip = 1;
 		}
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);

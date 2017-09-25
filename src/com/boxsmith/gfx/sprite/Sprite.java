@@ -9,14 +9,14 @@ public class Sprite {
 	private int width, height; // The width and height of the sprite in pixels.
     private int dimension; // The width and height of the sprite in pixels.
 
-	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
-	public static Sprite rock = new Sprite(16, 16, 0, SpriteSheet.tiles);
-	public static Sprite dirt = new Sprite(16, 32, 0, SpriteSheet.tiles);
-	public static Sprite voidSprite = new Sprite(16, 0x000000);
+	public static final Sprite GRASS = new Sprite(16, 0, 0, SpriteSheet.TILES);
+	public static final Sprite ROCK = new Sprite(16, 16, 0, SpriteSheet.TILES);
+	public static final Sprite DIRT = new Sprite(16, 32, 0, SpriteSheet.TILES);
+	public static final Sprite VOID_SPRITE = new Sprite(16, 0x000000);
 
-	public static Sprite player_forward = new Sprite(32, 16, 0, 224, SpriteSheet.tiles);
-	public static Sprite player_back = new Sprite(32, 16, 16, 224, SpriteSheet.tiles);
-	public static Sprite player_side = new Sprite(32, 16, 32, 224, SpriteSheet.tiles);
+	public static final Sprite PLAYER_FORWARD = new Sprite(32, 16, 0, 224, SpriteSheet.TILES);
+	public static final Sprite PLAYER_BACK = new Sprite(32, 16, 16, 224, SpriteSheet.TILES);
+	public static final Sprite PLAYER_SIDE = new Sprite(32, 16, 32, 224, SpriteSheet.TILES);
 
     /**
      * Creates a new sprite with the same width and height.

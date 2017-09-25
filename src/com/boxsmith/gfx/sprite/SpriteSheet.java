@@ -11,8 +11,8 @@ public class SpriteSheet {
 	private final int DIMENSION; // PNG image dimensions.
 	private int[] pixels; // PNG pixel data for the .
 
-	public static SpriteSheet tiles = new SpriteSheet("/Textures/Spritesheet16x16.png", 256);
-	public static SpriteSheet font = new SpriteSheet("/Font.png", 128);
+	public static final SpriteSheet TILES = new SpriteSheet("/Textures/Spritesheet16x16.png", 256);
+	public static final SpriteSheet FONT = new SpriteSheet("/Font.png", 128);
 
     /**
      * Creates a new 'sheet' from an image file containing a group of sprites.
