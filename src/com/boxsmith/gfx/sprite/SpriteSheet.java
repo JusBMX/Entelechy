@@ -13,6 +13,7 @@ public class SpriteSheet {
 
 	public static final SpriteSheet TILES = new SpriteSheet("/Textures/Spritesheet16x16.png", 256);
 	public static final SpriteSheet FONT = new SpriteSheet("/Font.png", 128);
+	public static final SpriteSheet MENUS = new SpriteSheet("/Textures/MenuSprites.png", 256);
 
     /**
      * Creates a new 'sheet' from an image file containing a group of sprites.

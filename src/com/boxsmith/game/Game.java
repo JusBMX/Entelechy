@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 	// Game Settings
     public static int width = 480;
     public static int height = width / 16 * 9;
-    public static final int SCALE = 2;
+    public static final int SCALE = 4;
 
 	private boolean running = false;
     private JFrame frame;
@@ -81,8 +81,6 @@ public class Game extends Canvas implements Runnable {
 
 		spawnlevel.render(0,0, screen);
 		screen.renderAnimation(0,0,SpriteAnimation.test, false);
-		screen.renderText("Hello World!", 10, 50, false);
-		screen.renderPoint(mouse.screenToWorld(false)[0],mouse.screenToWorld(false)[1],0x0000FF,false);
 		main.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {

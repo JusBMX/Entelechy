@@ -18,6 +18,9 @@ public class Sprite {
 	public static final Sprite PLAYER_BACK = new Sprite(32, 16, 16, 224, SpriteSheet.TILES);
 	public static final Sprite PLAYER_SIDE = new Sprite(32, 16, 32, 224, SpriteSheet.TILES);
 
+	public static final Sprite BUTTON = new Sprite(16, 112, 0, 0, SpriteSheet.MENUS);
+	public static final Sprite BUTTON_ACTIVE = new Sprite(16, 112, 0, 16, SpriteSheet.MENUS);
+
     /**
      * Creates a new sprite with the same width and height.
      * Width and height are set equal to <code>dimension</code>

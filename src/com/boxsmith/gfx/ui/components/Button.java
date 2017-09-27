@@ -72,7 +72,7 @@ public class Button extends Component {
     public void render(Screen screen){
         Sprite sprite = hover ? hoverSprite : this.sprite;
         screen.renderSprite(x, y, sprite, false);
-        screen.renderText(text, x - (text.length() * 4) / 2, y + 4, false);
+        screen.renderText(text, x + (text.length() * 4) / 2, y + 4, false);
     }
 
     /**
