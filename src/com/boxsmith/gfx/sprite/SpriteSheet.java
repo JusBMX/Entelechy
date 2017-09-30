@@ -12,8 +12,8 @@ public class SpriteSheet {
 	private int[] pixels; // PNG pixel data for the .
 
 	public static final SpriteSheet TILES = new SpriteSheet("/Textures/Spritesheet16x16.png", 256);
-	public static final SpriteSheet FONT = new SpriteSheet("/Font.png", 128);
-	public static final SpriteSheet MENUS = new SpriteSheet("/Textures/MenuSprites.png", 256);
+	public static final SpriteSheet FONT = new SpriteSheet("/Textures/Font.png", 128);
+	public static final SpriteSheet MENUS = new SpriteSheet("/Textures/UI/MenuSprites.png", 256);
 
     /**
      * Creates a new 'sheet' from an image file containing a group of sprites.

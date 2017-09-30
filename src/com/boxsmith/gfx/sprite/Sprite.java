@@ -12,6 +12,9 @@ public class Sprite {
 	public static final Sprite GRASS = new Sprite(16, 0, 0, SpriteSheet.TILES);
 	public static final Sprite ROCK = new Sprite(16, 16, 0, SpriteSheet.TILES);
 	public static final Sprite DIRT = new Sprite(16, 32, 0, SpriteSheet.TILES);
+	public static final Sprite TREE = new Sprite(16*7, 16*2, 16, SpriteSheet.TILES);
+	public static final Sprite GRASS_MAIN_MENU = new Sprite(16, 0, 16*4, SpriteSheet.TILES);
+	public static final Sprite SKY_MAIN_MENU = new Sprite(16, 16*7, 0, SpriteSheet.TILES);
 	public static final Sprite VOID_SPRITE = new Sprite(16, 0x000000);
 
 	public static final Sprite PLAYER_FORWARD = new Sprite(32, 16, 0, 224, SpriteSheet.TILES);

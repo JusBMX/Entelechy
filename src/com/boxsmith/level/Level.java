@@ -1,5 +1,7 @@
 package com.boxsmith.level;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,28 +11,20 @@ import com.boxsmith.entity.Player;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.level.tile.Tile;
 
+import javax.imageio.ImageIO;
+
 public abstract class Level {
 
 	int width, height;
-	int[] tiles;
+	int[] tilesMapData;
 
 	private List<Entity> entities = new ArrayList<>();
 
-	public Level(int width, int height) {
-		this.height = height;
-		this.width = width;
-		tiles = new int[width * height];
-		generateLevel();
-	}
-
 	public Level(String path) {
 		loadLevel(path);
-		generateLevel();
 	}
 
 	protected abstract void loadLevel(String path);
-
-	protected abstract void generateLevel();
 
 	public void update() {
 		for (Entity e : entities) {
@@ -52,10 +46,6 @@ public abstract class Level {
 		for (Entity e : entities) {
 			e.render(screen);
 		}
-	}
-
-	public void render(Screen screen){
-		render(0, 0, screen);
 	}
 
 	public void addEntity(Entity e) {
@@ -92,12 +82,16 @@ public abstract class Level {
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.voidTile;
-		if (tiles[x + y * width] == Tile.COL_GRASS)
+		if (tilesMapData[x + y * width] == Tile.COLOR_GRASS)
 			return Tile.grassTile;
-		if (tiles[x + y * width] == Tile.COL_ROCK)
+		if (tilesMapData[x + y * width] == Tile.COLOR_ROCK)
 			return Tile.rockTile;
-		if (tiles[x + y * width] == Tile.COL_DIRT)
+		if (tilesMapData[x + y * width] == Tile.COLOR_DIRT)
 			return Tile.dirtTile;
+		if (tilesMapData[x + y * width] == Tile.COLOR_GRASS_MENU)
+			return Tile.grassTileMENU;
+		if (tilesMapData[x + y * width] == Tile.COLOR_SKY)
+			return Tile.skyTile;
 		return Tile.voidTile;
 	}
 }

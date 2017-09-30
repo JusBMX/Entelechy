@@ -16,6 +16,7 @@ import com.boxsmith.gfx.ui.menus.Menu;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
 import com.boxsmith.level.Level;
+import com.boxsmith.level.MainMenu;
 import com.boxsmith.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
@@ -23,7 +24,7 @@ public class Game extends Canvas implements Runnable {
 	// Game Settings
     public static int width = 480;
     public static int height = width / 16 * 9;
-    public static final int SCALE = 4;
+    public static final int SCALE = 2;
 
 	private boolean running = false;
     private JFrame frame;
@@ -37,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 	public static Mouse mouse;
 
 	public static Menu main = new Main();
-	public static Level spawnlevel = new SpawnLevel("/Textures/Levels/SpawnGroundTiles.png");
+	public static Level spawnlevel = new MainMenu("/Levels/Main Menu/MainMenuTiles.png");
 
 	private Game() {
 		Dimension resolution = new Dimension(width * SCALE, height * SCALE);
