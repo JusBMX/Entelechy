@@ -2,14 +2,11 @@ package com.boxsmith.entity;
 
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
-import com.boxsmith.level.tile.TileCoordinate;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
 	public int direction, healthPoints, maxHealthPoints, respawnTime;
-
-	public TileCoordinate spawnpoint;
 
 	public abstract void update();
 
@@ -37,8 +34,6 @@ public abstract class Mob extends Entity {
 	
 	public void respawn(){
 		healthPoints = maxHealthPoints;
-		x = spawnpoint.getX();
-		y = spawnpoint.getY();
 	}
 
 	public boolean isAlive() {

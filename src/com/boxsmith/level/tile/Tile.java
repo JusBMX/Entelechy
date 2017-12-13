@@ -18,7 +18,7 @@ public abstract class Tile {
 	public static Tile voidTile = new VoidTile(Sprite.VOID_SPRITE);
 
 	public final static int COLOR_GRASS = 0xFF00FF00;
-	public final static int COLOR_SKY = -16733441;
+	public final static int COLOR_SKY = 0xFF00AAFF;
 	public final static int COLOR_ROCK = 0xFFFF0000;
 	public final static int COLOR_GRASS_MENU = 0xFFA56400;
 	public final static int COLOR_DIRT = 0xFF0000FF;

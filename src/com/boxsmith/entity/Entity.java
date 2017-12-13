@@ -2,12 +2,10 @@ package com.boxsmith.entity;
 
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.level.Level;
-import com.boxsmith.level.tile.TileCoordinate;
 
 public abstract class Entity{
 	public int x, y;
 	protected Level level;
-	protected TileCoordinate spawnpoint;
 
 	public abstract void update();
 

@@ -15,9 +15,6 @@ import com.boxsmith.gfx.ui.menus.Main;
 import com.boxsmith.gfx.ui.menus.Menu;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
-import com.boxsmith.level.Level;
-import com.boxsmith.level.MainMenu;
-import com.boxsmith.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -36,9 +33,10 @@ public class Game extends Canvas implements Runnable {
     public static Screen screen;
 	public static Keyboard keys;
 	public static Mouse mouse;
+	public static State state;
 
 	public static Menu main = new Main();
-	public static Level spawnlevel = new MainMenu("/Levels/Main Menu/MainMenuTiles.png");
+	//public static Level menu = new MainMenu("/Levels/Main Menu/MainMenuTiles.png");
 
 	private Game() {
 		Dimension resolution = new Dimension(width * SCALE, height * SCALE);
@@ -46,7 +44,9 @@ public class Game extends Canvas implements Runnable {
 		keys = new Keyboard();
 		mouse = new Mouse();
 
-		setPreferredSize(resolution); // <-- DON'T F****** CHANGE. EVERYTHING WITH THE MOUSE LOCATION WILL BREAK.
+		state = State.MAIN;
+
+		setPreferredSize(resolution); // <-- DON'T CHANGE. EVERYTHING WITH THE MOUSE LOCATION WILL BREAK.
 		addKeyListener(keys);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
@@ -67,8 +67,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		keys.update();
 		SpriteAnimation.test.tick();
-		spawnlevel.update();
-		main.tick();
+		state.tick();
 	}
 
 	public void render() {
@@ -79,10 +78,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-
-		spawnlevel.render(0,0, screen);
-		screen.renderAnimation(0,0,SpriteAnimation.test, false);
-		main.render(screen);
+		state.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

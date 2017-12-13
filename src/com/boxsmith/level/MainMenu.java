@@ -2,7 +2,6 @@ package com.boxsmith.level;
 
 import com.boxsmith.entity.Player;
 import com.boxsmith.entity.Tree;
-import com.boxsmith.level.tile.TileCoordinate;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -18,7 +17,7 @@ public class MainMenu extends Level {
 
     protected void loadLevel(String path) {
         try {
-            BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path));
+            BufferedImage image = ImageIO.read(MainMenu.class.getResource(path));
             height = image.getHeight();
             width = image.getWidth();
             tilesMapData = new int[width * height];
@@ -32,7 +31,7 @@ public class MainMenu extends Level {
     public void loadEntities(String path){
         try {
             int[] temp = new int[width * height];
-            BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path));
+            BufferedImage image = ImageIO.read(MainMenu.class.getResource(path));
             image.getRGB(0,0, width, height, temp, 0, width);
             for(int i = 0; i < temp.length; i++){
                 if(temp[i] == 0xFF3B00FF){

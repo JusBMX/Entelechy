@@ -1,6 +1,7 @@
 package com.boxsmith.gfx.ui.menus;
 
 import com.boxsmith.game.Game;
+import com.boxsmith.game.State;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.gfx.ui.components.Button;
 
@@ -32,8 +33,11 @@ public class Main extends Menu {
      */
     public void mouseClick(){
         if (findComponentAtMouse() == start){
-            System.out.println("Start");
+            Game.state = State.LOAD;
+        } else if (findComponentAtMouse() == exit){
+            java.lang.System.exit(0);
         }
+
     }
 
 }

@@ -36,7 +36,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
 	public void mouseClicked(MouseEvent e) {
 		Game.main.mouseClick();
-	}
+	} // Needs to be change.
 
 	public void mouseEntered(MouseEvent e) {}
 
