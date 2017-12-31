@@ -7,7 +7,7 @@ import com.boxsmith.input.Mouse;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Menu{
+public abstract class Menu {
 
     private List<Component> components = new ArrayList<>(); // Components in a menu.
 

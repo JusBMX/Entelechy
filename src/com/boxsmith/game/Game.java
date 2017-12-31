@@ -11,10 +11,9 @@ import javax.swing.*;
 
 import com.boxsmith.gfx.sprite.SpriteAnimation;
 import com.boxsmith.gfx.Screen;
-import com.boxsmith.gfx.ui.menus.Main;
-import com.boxsmith.gfx.ui.menus.Menu;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
+import com.boxsmith.sound.Sound;
 
 public class Game extends Canvas implements Runnable {
 
@@ -34,9 +33,6 @@ public class Game extends Canvas implements Runnable {
 	public static Keyboard keys;
 	public static Mouse mouse;
 	public static State state;
-
-	public static Menu main = new Main();
-	//public static Level menu = new MainMenu("/Levels/Main Menu/MainMenuTiles.png");
 
 	private Game() {
 		Dimension resolution = new Dimension(width * SCALE, height * SCALE);

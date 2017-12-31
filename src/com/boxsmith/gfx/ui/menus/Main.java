@@ -4,6 +4,7 @@ import com.boxsmith.game.Game;
 import com.boxsmith.game.State;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.gfx.ui.components.Button;
+import com.boxsmith.sound.Sound;
 
 public class Main extends Menu {
 
@@ -34,6 +35,7 @@ public class Main extends Menu {
     public void mouseClick(){
         if (findComponentAtMouse() == start){
             Game.state = State.LOAD;
+            Sound.playSound("");
         } else if (findComponentAtMouse() == exit){
             java.lang.System.exit(0);
         }

@@ -1,7 +1,5 @@
 package com.boxsmith.level;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +9,12 @@ import com.boxsmith.entity.Player;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.level.tile.Tile;
 
-import javax.imageio.ImageIO;
-
 public abstract class Level {
 
 	int width, height;
 	int[] tilesMapData;
+
+	public int xScroll = 0, yScroll = 0;
 
 	private List<Entity> entities = new ArrayList<>();
 
@@ -28,11 +26,11 @@ public abstract class Level {
 
 	public void update() {
 		for (Entity e : entities) {
-			e.update();
+			//e.update();
 		}
 	}
 
-	public void render(int xScroll, int yScroll, Screen screen) {
+	public void render(Screen screen) {
 		screen.setOffset(xScroll, yScroll);
 		int x0 = xScroll >> 4;
 		int x1 = (xScroll + screen.width + 16) >> 4;
@@ -44,7 +42,7 @@ public abstract class Level {
 			}
 		}
 		for (Entity e : entities) {
-			e.render(screen);
+			//e.render(screen);
 		}
 	}
 

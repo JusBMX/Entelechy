@@ -1,5 +1,7 @@
 package com.boxsmith.gfx.ui.menus;
 
+import com.boxsmith.sound.Sound;
+
 public class Load extends Menu {
 
     /**
@@ -13,6 +15,6 @@ public class Load extends Menu {
      * Listens for a mouseClick and handles the actions.
      */
     public void mouseClick(){
-
+        Sound.playSound("");
     }
 }
