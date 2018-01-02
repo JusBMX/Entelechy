@@ -24,9 +24,9 @@ public abstract class Level {
 
 	protected abstract void loadLevel(String path);
 
-	public void update() {
+	public void tick() {
 		for (Entity e : entities) {
-			//e.update();
+			e.tick();
 		}
 	}
 
@@ -42,11 +42,12 @@ public abstract class Level {
 			}
 		}
 		for (Entity e : entities) {
-			//e.render(screen);
+			e.render(screen);
 		}
 	}
 
 	public void addEntity(Entity e) {
+		e.init(this);
 		entities.add(e);
 	}
 

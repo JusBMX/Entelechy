@@ -35,7 +35,6 @@ public class Main extends Menu {
     public void mouseClick(){
         if (findComponentAtMouse() == start){
             Game.state = State.LOAD;
-            Sound.playSound("");
         } else if (findComponentAtMouse() == exit){
             java.lang.System.exit(0);
         }

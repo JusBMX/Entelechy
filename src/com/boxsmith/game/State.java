@@ -5,11 +5,13 @@ import com.boxsmith.gfx.ui.menus.Load;
 import com.boxsmith.gfx.ui.menus.Main;
 import com.boxsmith.gfx.ui.menus.Menu;
 import com.boxsmith.level.Level;
-import com.boxsmith.level.MainMenu;
+import com.boxsmith.level.MainMenuLevel;
+import com.boxsmith.level.TestLevel;
 
 public enum State {
-    MAIN (new Main(), new MainMenu("/Levels/Main Menu/MainMenuTiles.png")),
-    LOAD (new Load(), null);
+    MAIN (new Main(), new MainMenuLevel("/Levels/Main Menu/MainMenuTiles.png")),
+    LOAD (new Load(), null),
+    PLAY (null, new TestLevel("/Levels/Test/TestLevelTiles.png"));
 
     private final Menu menu;
     private final Level level;
@@ -23,14 +25,18 @@ public enum State {
         return menu;
     }
 
+    public Level getStateLevel(){
+        return level;
+    }
+
     public void tick(){
-        menu.tick();
+        if (menu != null) menu.tick();
+        if (level != null) level.tick();
     }
 
     public void render(Screen screen){
-        level.render(screen);
-        menu.render(screen);
-
+        if (level != null) level.render(screen);
+        if (menu != null) menu.render(screen);
     }
 
 }

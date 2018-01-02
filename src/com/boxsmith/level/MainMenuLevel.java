@@ -5,9 +5,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class MainMenu extends Level {
+public class MainMenuLevel extends Level {
 
-    public MainMenu(String path) {
+    public MainMenuLevel(String path) {
         super(path);
 
         loadEntities("/Levels/Main Menu/MainMenuTilesEntities.png");
@@ -15,7 +15,7 @@ public class MainMenu extends Level {
 
     protected void loadLevel(String path) {
         try {
-            BufferedImage image = ImageIO.read(MainMenu.class.getResource(path));
+            BufferedImage image = ImageIO.read(MainMenuLevel.class.getResource(path));
             height = image.getHeight();
             width = image.getWidth();
             tilesMapData = new int[width * height];
@@ -29,7 +29,7 @@ public class MainMenu extends Level {
     public void loadEntities(String path){
         try {
             int[] temp = new int[width * height];
-            BufferedImage image = ImageIO.read(MainMenu.class.getResource(path));
+            BufferedImage image = ImageIO.read(MainMenuLevel.class.getResource(path));
             image.getRGB(0,0, width, height, temp, 0, width);
             for(int i = 0; i < temp.length; i++){
                 /*if(temp[i] == 0xFF3B00FF){
