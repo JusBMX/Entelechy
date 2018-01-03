@@ -9,13 +9,16 @@ import com.boxsmith.sound.Sound;
 public class Load extends Menu {
 
     private Button start = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "start",
-            Game.width / 2 - Sprite.BUTTON.getWidth() / 2 , 200);
+            20 , 200);
+    private Button back = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "back",
+            Game.width - Sprite.BUTTON.getWidth() - 20, 200);
 
     /**
      * The main menu for the game.
      */
     public Load(){
         add(start);
+        add(back);
     }
 
     /**
@@ -24,7 +27,10 @@ public class Load extends Menu {
     public void mouseClick(){
         if (findComponentAtMouse() == start){
             Game.state = State.PLAY;
-            Sound.playSound("");
+            Sound.playSound("/Sounds/697340_1.mid");
+        }
+        if(findComponentAtMouse() == back){
+            Game.state = State.MAIN;
         }
     }
 }

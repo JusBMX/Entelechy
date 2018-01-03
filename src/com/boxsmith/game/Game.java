@@ -9,7 +9,6 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.*;
 
-import com.boxsmith.gfx.sprite.SpriteAnimation;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.input.Keyboard;
 import com.boxsmith.input.Mouse;
@@ -49,6 +48,7 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame("Entelechy");
 		frame.add(this);
 		frame.pack();
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}

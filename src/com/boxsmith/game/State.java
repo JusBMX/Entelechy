@@ -10,7 +10,7 @@ import com.boxsmith.level.TestLevel;
 
 public enum State {
     MAIN (new Main(), new MainMenuLevel("/Levels/Main Menu/MainMenuTiles.png")),
-    LOAD (new Load(), null),
+    LOAD (new Load(), new MainMenuLevel("/Levels/Main Menu/MainMenuTiles.png")),
     PLAY (null, new TestLevel("/Levels/Test/TestLevelTiles.png"));
 
     private final Menu menu;
