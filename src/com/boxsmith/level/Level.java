@@ -34,12 +34,11 @@ public abstract class Level {
 			tilesMapData = new int[width * height];
 			image.getRGB(0, 0, width, height, tilesMapData, 0, width);
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("Fail to load level image!");
 		}
 	}
 
-	void loadEntities(String path){
+	void loadEntitiesFromFile(String path){
 
 	}
 

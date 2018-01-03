@@ -4,7 +4,7 @@ public class MainMenuLevel extends Level {
 
     public MainMenuLevel(String path) {
         super(path);
-        loadEntities("/Levels/Main Menu/MainMenuTilesEntities.png");
+        loadEntitiesFromFile("/Levels/Main Menu/MainMenuTilesEntities.png");
     }
 
 }
