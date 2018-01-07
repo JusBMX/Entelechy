@@ -12,6 +12,8 @@ public class Player extends Mob {
     public Player() {
         x = 30;
         y = 10;
+        width = Sprite.PLAYER_FORWARD.getWidth();
+        height = Sprite.PLAYER_FORWARD.getHeight();
     }
 
     @Override
@@ -35,14 +37,6 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
-        screen.renderSprite(x, y, Sprite.DIRT,true);
-
-        for (int c = 0; c < 2; c++) {
-            int xt = ((x + xA));
-            int yt = ((y + yA) + c * 16);
-            screen.renderPoint(xt, yt, 0xFFFFFFFF,true);
-        }
-
-
+        screen.renderSprite(x, y, Sprite.PLAYER_FORWARD,true);
     }
 }

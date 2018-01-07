@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import com.boxsmith.game.Game;
+import com.boxsmith.gfx.ui.menus.Menu;
+import com.boxsmith.level.Level;
 
 public class Mouse implements MouseListener, MouseMotionListener {
 
@@ -35,7 +37,15 @@ public class Mouse implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		Game.state.getStateMenu().mouseClick();
+		Menu currentMenu = Game.state.getStateMenu();
+		Level currentLevel = Game.state.getStateLevel();
+
+		if(currentMenu != null) {
+			currentMenu.mouseClick();
+		}
+		if(currentLevel != null) {
+			currentLevel.mouseClick();
+		}
 	}
 
 	public void mouseEntered(MouseEvent e) {}

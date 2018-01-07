@@ -16,7 +16,7 @@ import com.boxsmith.input.Mouse;
 public class Game extends Canvas implements Runnable {
 
 	// Game Settings
-    public static int width = 480;
+    public static int width = 720;
     public static int height = width / 16 * 9;
     public static final int SCALE = 2;
 

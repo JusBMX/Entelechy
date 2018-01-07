@@ -7,4 +7,5 @@ public class MainMenuLevel extends Level {
         loadEntitiesFromFile("/Levels/Main Menu/MainMenuTilesEntities.png");
     }
 
+
 }

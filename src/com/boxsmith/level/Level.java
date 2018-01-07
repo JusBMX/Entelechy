@@ -9,6 +9,8 @@ import com.boxsmith.entity.Entity;
 import com.boxsmith.entity.Mob;
 import com.boxsmith.entity.Player;
 import com.boxsmith.gfx.Screen;
+import com.boxsmith.gfx.ui.components.Component;
+import com.boxsmith.input.Mouse;
 import com.boxsmith.level.tile.Tile;
 
 import javax.imageio.ImageIO;
@@ -40,6 +42,29 @@ public abstract class Level {
 
 	void loadEntitiesFromFile(String path){
 
+	}
+
+
+	/**
+	 * Sees if a menu component is below the mouse courser.
+	 *
+	 * @return The component below the mouse courser. Null if none are.
+	 */
+	public Entity findEntityAtMouse(){
+		int[] coordinate = Mouse.screenToWorld(false);
+		for (Entity entity: entities) {
+			if (entity.onComponent(coordinate) != null) {
+				return entity.onComponent(coordinate);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Listens for a mouseClick and handles the actions.
+	 */
+	public void mouseClick(){
+		System.out.print(findEntityAtMouse());
 	}
 
 	public void tick() {

@@ -23,6 +23,7 @@ public class Sprite {
 
 	public static final Sprite BUTTON = new Sprite(16, 112, 0, 0, SpriteSheet.MENUS);
 	public static final Sprite BUTTON_ACTIVE = new Sprite(16, 112, 0, 16, SpriteSheet.MENUS);
+	public static final Sprite CHAT = new Sprite(128, 256, 0, 32, SpriteSheet.MENUS);
 
     /**
      * Creates a new sprite with the same width and height.

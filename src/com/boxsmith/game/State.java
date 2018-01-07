@@ -4,6 +4,7 @@ import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.ui.menus.Load;
 import com.boxsmith.gfx.ui.menus.Main;
 import com.boxsmith.gfx.ui.menus.Menu;
+import com.boxsmith.gfx.ui.menus.Play;
 import com.boxsmith.level.Level;
 import com.boxsmith.level.MainMenuLevel;
 import com.boxsmith.level.TestLevel;
@@ -11,7 +12,7 @@ import com.boxsmith.level.TestLevel;
 public enum State {
     MAIN (new Main(), new MainMenuLevel("/Levels/Main Menu/MainMenuTiles.png")),
     LOAD (new Load(), new MainMenuLevel("/Levels/Main Menu/MainMenuTiles.png")),
-    PLAY (null, new TestLevel("/Levels/Test/TestLevelTiles.png"));
+    PLAY (new Play(), new TestLevel("/Levels/Test/TestLevelTiles.png"));
 
     private final Menu menu;
     private final Level level;
