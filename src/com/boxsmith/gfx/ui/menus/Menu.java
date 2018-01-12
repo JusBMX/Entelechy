@@ -21,6 +21,18 @@ public abstract class Menu {
     }
 
     /**
+     * Adds components to the menu.
+     *
+     * @param components The component to add.
+     */
+    public void add(List<Component> components){
+        for (Component component: components) {
+            components.add(component);
+        }
+
+    }
+
+    /**
      * Renders the menu to the screen.
      * @param screen The screen to render to.
      */
@@ -31,18 +43,33 @@ public abstract class Menu {
     }
 
     /**
-     * Sees if a menu component is below the mouse courser.
+     * Sees if a menu component is below the mouse courser. If so, it returns the top most component.
      *
      * @return The component below the mouse courser. Null if none are.
      */
     public Component findComponentAtMouse(){
+        List<Component> foundComponents = new ArrayList<>();
         int[] coordinate = Mouse.screenToWorld(false);
         for (Component component: components) {
             if (component.onComponent(coordinate) != null) {
-                return component.onComponent(coordinate);
+                foundComponents.add(component.onComponent(coordinate));
             }
         }
+        if(!foundComponents.isEmpty()) {
+            return foundComponents.get(foundComponents.size() - 1);
+        }
         return null;
+    }
+
+    public List<Component> findComponentsAtMouse(){
+        List<Component> foundComponents = new ArrayList<>();
+        int[] coordinate = Mouse.screenToWorld(false);
+        for (Component component: components) {
+            if (component.onComponent(coordinate) != null) {
+                foundComponents.add(component.onComponent(coordinate));
+            }
+        }
+        return foundComponents;
     }
 
     /**

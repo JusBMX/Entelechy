@@ -3,12 +3,22 @@ package com.boxsmith.entity;
 import com.boxsmith.game.Game;
 import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
+import com.boxsmith.gfx.ui.components.Chat.Card;
+import com.boxsmith.gfx.ui.menus.Play;
 import com.boxsmith.input.Keyboard;
 
 public class Player extends Mob {
 
     private Keyboard input;
     int xA = 0, yA = 0;
+
+    @Override
+    public void mouseClick() {
+        Play.play.chat.card = new Card("Hello me, meet the real me And my misfit's way of life A dark black past is" +
+                " my Most valued possession Hindsight is always 20-20 But looking back it's still a bit fuzzy " +
+                "Speak of mutually assured destruction?", null);
+    }
+
     public Player() {
         x = 30;
         y = 10;

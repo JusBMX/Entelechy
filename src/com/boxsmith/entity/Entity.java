@@ -41,6 +41,7 @@ public abstract class Entity {
         return null;
     }
 
+    public abstract void mouseClick();
 
     public void init(Level level) {
         this.level = level;

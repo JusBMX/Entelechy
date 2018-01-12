@@ -1,5 +1,6 @@
 package com.boxsmith.level;
 
+import com.boxsmith.entity.Hans;
 import com.boxsmith.entity.Player;
 
 public class TestLevel extends Level {
@@ -7,6 +8,7 @@ public class TestLevel extends Level {
     public TestLevel(String path) {
         super(path);
         addEntity(new Player());
+        addEntity(new Hans());
     }
 
 

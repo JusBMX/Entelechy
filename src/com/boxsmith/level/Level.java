@@ -64,7 +64,9 @@ public abstract class Level {
 	 * Listens for a mouseClick and handles the actions.
 	 */
 	public void mouseClick(){
-		System.out.print(findEntityAtMouse());
+		if(findEntityAtMouse() != null) {
+			findEntityAtMouse().mouseClick();
+		}
 	}
 
 	public void tick() {

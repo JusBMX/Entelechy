@@ -4,38 +4,33 @@ import com.boxsmith.gfx.Screen;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.gfx.ui.components.Button;
 import com.boxsmith.gfx.ui.components.Component;
-import com.boxsmith.gfx.ui.components.ContentBox;
 
-public class Chat extends ContentBox {
+public class Chat extends Component {
 
-    private String text = "Test";
-    public Button next = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "Next",
-            x + 10, y + 102);
+    public Card card;
+    public Button nextButton;
 
     public Chat(Sprite background, int x, int y) {
-        super(background, x, y);
-        add(next);
+        this.x = x;
+        this.y = y;
+        nextButton = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "Next", x, y);
     }
-
-    public void setText(String text){
-        this.text = text;
-    }
-
-    private void textRendering(Screen screen){
-        for(int i = 0; i< text.length()/15; i++){
-            screen.renderText(text.substring(15*i, ), x, y, false);
-        }
-
-    }
-
 
     @Override
     public void render(Screen screen){
-        screen.renderSprite(x,y,background,false);
-        textRendering(screen);
-        for(Component component : components){
-            component.render(screen);
+        if(card == null){
+            return;
         }
+        //screen.renderSprite(x, y, background,false);
+        String[] text = card.text.split("(?<=\\G.{31})");
+        for(int i = 0; i < text.length; i++){
+            screen.renderText(text[i], x + 4, y + i * 16 + 4, false);
+        }
+        nextButton.render(screen);
+    }
+
+    @Override
+    public void tick() {
 
     }
 

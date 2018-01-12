@@ -6,3 +6,5 @@ Level render entities if only on screen.
 
 Game state
 Creation of Levels, Menus, Tiles, Sprites, SpriteAnimation.
+
+Mouse click dose not registers if mouse moves while clicking.
