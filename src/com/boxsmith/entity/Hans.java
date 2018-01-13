@@ -8,6 +8,11 @@ import com.boxsmith.gfx.ui.menus.Play;
 
 public class Hans extends Mob{
 
+    public Hans(){
+        width = Sprite.PLAYER_FORWARD.getWidth();
+        height = Sprite.PLAYER_FORWARD.getHeight();
+    }
+
     @Override
     public void tick() {
 
@@ -15,7 +20,7 @@ public class Hans extends Mob{
 
     @Override
     public void render(Screen screen) {
-        screen.renderSprite(10,10, Sprite.PLAYER_SIDE, true);
+        screen.renderSprite(x,y, Sprite.PLAYER_SIDE, true);
     }
 
     @Override

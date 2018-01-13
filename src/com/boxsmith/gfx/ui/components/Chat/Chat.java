@@ -10,10 +10,10 @@ public class Chat extends Component {
     public Card card;
     public Button nextButton;
 
-    public Chat(Sprite background, int x, int y) {
+    public Chat(int x, int y) {
         this.x = x;
         this.y = y;
-        nextButton = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "Next", x, y);
+        nextButton = new Button(Sprite.BUTTON, Sprite.BUTTON_ACTIVE, "Next", x+64, y + 110);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Chat extends Component {
         if(card == null){
             return;
         }
-        //screen.renderSprite(x, y, background,false);
+        screen.renderSprite(x, y, Sprite.CHAT,false);
         String[] text = card.text.split("(?<=\\G.{31})");
         for(int i = 0; i < text.length; i++){
             screen.renderText(text[i], x + 4, y + i * 16 + 4, false);
@@ -31,7 +31,7 @@ public class Chat extends Component {
 
     @Override
     public void tick() {
-
+        //nextButton.tick();
     }
 
 }

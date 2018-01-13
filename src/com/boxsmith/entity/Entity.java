@@ -36,6 +36,7 @@ public abstract class Entity {
     public Entity onComponent(int[] coordinate) {
         if ((coordinate[0] >= x - Game.screen.xOffset && coordinate[0] <= x + width - Game.screen.xOffset)
                 && (coordinate[1] >= y - Game.screen.yOffset && coordinate[1] <= y + height - Game.screen.yOffset)) {
+
             return this;
         }
         return null;
