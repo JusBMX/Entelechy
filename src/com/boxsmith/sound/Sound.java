@@ -6,24 +6,31 @@ import javax.sound.sampled.Clip;
 
 public class Sound {
 
-    public static synchronized Clip playSound(final String url) {
+    private Clip clip;
+
+    public Sound (final String url){
         try {
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream(url));
             clip.open(inputStream);
-            clip.start();
-            return clip;
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            clip = null;
         }
-        return null;
     }
 
-    public void setLoop(){
-
+    public synchronized void playSound() {
+        clip.start();
     }
 
-    public void stopSound(){
+    public void setLoop(int count){
+        clip.loop(count);
+    }
+
+    public synchronized void stop(){
+        clip.stop();
+    }
+
+    public void setVolumne (){
 
     }
 }

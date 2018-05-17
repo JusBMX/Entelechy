@@ -61,6 +61,11 @@ public abstract class Menu {
         return null;
     }
 
+    /**
+     * Sees if a menu component is below the mouse courser. If so, it returns all components.
+     *
+     * @return The components below the mouse courser. Null if none are.
+     */
     public List<Component> findComponentsAtMouse(){
         List<Component> foundComponents = new ArrayList<>();
         int[] coordinate = Mouse.screenToWorld(false);

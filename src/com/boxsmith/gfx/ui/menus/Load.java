@@ -27,7 +27,7 @@ public class Load extends Menu {
     public void mouseClick(){
         if (findComponentAtMouse() == start){
             Game.state = State.PLAY;
-            Sound.playSound("/Sounds/697340_1.mid");
+            //Sound.playSound("/Sounds/697340_1.mid");
         }
         if(findComponentAtMouse() == back){
             Game.state = State.MAIN;

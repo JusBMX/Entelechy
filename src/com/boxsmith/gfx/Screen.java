@@ -56,7 +56,6 @@ public class Screen {
 	 * @param yPos The y coordinate.
 	 * @param tile The tile to render.
 	 */
-	@Deprecated
 	public void renderTile(int xPos, int yPos, Tile tile) {
 		xPos -= xOffset;
 		yPos -= yOffset;
