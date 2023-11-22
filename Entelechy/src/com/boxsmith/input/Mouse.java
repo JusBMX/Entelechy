@@ -42,6 +42,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
 		if(currentMenu != null) {
 			currentMenu.mouseClick();
+			if (currentMenu.mouseClick() != null) return; //Prevents clicking through the UI.
 		}
 		if(currentLevel != null) {
 			currentLevel.mouseClick();

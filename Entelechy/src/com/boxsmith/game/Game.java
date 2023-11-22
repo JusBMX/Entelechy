@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 	// Game Settings
 	// Resolution
 	public static final int SCALE = 2; // Pixel scale
-	private static int resolution = 720;
+	public static int resolution = 720;
 	public static int height = resolution / SCALE;
     public static int width = height * 16 / 9;
 

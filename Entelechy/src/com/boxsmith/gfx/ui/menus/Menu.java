@@ -21,6 +21,14 @@ public abstract class Menu {
     }
 
     /**
+     * Removes a component from the menu. Returns True if removed.
+     * @param component The componment to remove.
+     */
+    public Boolean remove(Component component){
+        return components.remove(component);
+    }
+
+    /**
      * Adds components to the menu.
      *
      * @param components The component to add.
@@ -89,6 +97,6 @@ public abstract class Menu {
     /**
      * Listens for a mouseClick and handles the actions.
      */
-    public abstract void mouseClick();
+    public abstract Component mouseClick();
 
 }

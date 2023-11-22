@@ -4,6 +4,7 @@ import com.boxsmith.game.Game;
 import com.boxsmith.game.State;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.gfx.ui.components.Button;
+import com.boxsmith.gfx.ui.components.Component;
 
 public class Load extends Menu {
 
@@ -23,13 +24,15 @@ public class Load extends Menu {
     /**
      * Listens for a mouseClick and handles the actions.
      */
-    public void mouseClick(){
-        if (findComponentAtMouse() == start){
+    public Component mouseClick(){
+        Component component = findComponentAtMouse();
+        if (component == start){
             Game.state = State.PLAY;
             //Sound.playSound("/Sounds/697340_1.mid");
         }
-        if(findComponentAtMouse() == back){
+        if(component == back){
             Game.state = State.MAIN;
         }
+        return component;
     }
 }

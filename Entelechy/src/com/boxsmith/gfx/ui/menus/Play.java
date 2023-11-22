@@ -1,37 +1,28 @@
 package com.boxsmith.gfx.ui.menus;
 
 import com.boxsmith.gfx.Screen;
+import com.boxsmith.gfx.ui.components.Component;
 import com.boxsmith.gfx.ui.components.Chat.Chat;
 
 public class Play extends Menu {
 
     public static Play play = new Play();
 
-    public Chat chat = new Chat(0,200);
+    public Chat chat = new Chat(0, 200, this);
     //private Button exit = new Button()
 
     private Play(){
-        add(chat);
-        add(chat.nextButton);
+        
     }
 
     @Override
-    public void render(Screen screen) {
-        chat.render(screen);
-    }
-
-    @Override
-    public void tick() {
-        chat.tick();
-    }
-
-    @Override
-    public void mouseClick() {
+    public Component mouseClick() {
+        Component component = findComponentAtMouse();
         if (chat.card != null) {
-            if (findComponentAtMouse() == chat.nextButton) {
-                System.out.println("Hi");
-                chat.card = chat.card.nextCard;
+            if (component == chat.card.option) {
+                chat.card.option.action.actionMethod();
             }
         }
+        return component;
     }
 }

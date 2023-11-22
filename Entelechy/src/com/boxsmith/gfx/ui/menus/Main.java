@@ -4,6 +4,7 @@ import com.boxsmith.game.Game;
 import com.boxsmith.game.State;
 import com.boxsmith.gfx.sprite.Sprite;
 import com.boxsmith.gfx.ui.components.Button;
+import com.boxsmith.gfx.ui.components.Component;
 
 public class Main extends Menu {
 
@@ -31,14 +32,15 @@ public class Main extends Menu {
     /**
      * Listens for a mouseClick and handles the actions.
      */
-    public void mouseClick(){
-        if (findComponentAtMouse() == start){
+    public Component mouseClick(){
+        Component component = findComponentAtMouse();
+        if (component == start){
             Game.state = State.LOAD;
         }
-        if (findComponentAtMouse() == exit){
+        if (component == exit){
             java.lang.System.exit(0);
         }
-
+        return component;
     }
 
 }
