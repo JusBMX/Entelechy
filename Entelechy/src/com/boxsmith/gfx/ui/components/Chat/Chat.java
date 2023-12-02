@@ -1,4 +1,4 @@
-package com.boxsmith.gfx.ui.components.Chat;
+package com.boxsmith.gfx.ui.components.chat;
 
 import java.util.ArrayList;
 
@@ -29,17 +29,15 @@ public class Chat extends Component {
      */
     @Override
     public void render(Screen screen){
-
-
         if (card == null) return;
+        
         screen.renderSprite(x, y, Sprite.CHAT, false);
+
         if (card.type == "Message"){
             ArrayList<String> lines = wordWrap(card.text);
             for (int newLineCount = 0; newLineCount < lines.size(); newLineCount++){
                 screen.renderText(lines.get(newLineCount), x + 4, y + newLineCount * 16 + 4, false);
             }
-
-            card.option.render(screen);
         }
     }
 
@@ -52,14 +50,41 @@ public class Chat extends Component {
     }
 
     public void show(Card card){
+        hide(); //Removes the old card.
         this.card = card;
-        menu.add(this);
-        menu.add(card.option);
+        if(card.type == "Message"){
+            if (!menu.getComponents().contains(this)) {
+                menu.add(this);
+            }
+            if (!menu.getComponents().contains(card.nexButton)) {
+                menu.add(card.nexButton);
+            }
+        }
+        if(card.type == "Options"){
+            if (!menu.getComponents().contains(this)) {
+                menu.add(this);
+            }
+            for (int i = 0; i < card.options.length; i++){
+                if (!menu.getComponents().contains(card.options[i])) {
+                    menu.add(card.options[i]);
+                }
+            }
+        }
     }
 
     public void hide(){
+        if (card == null) {
+            return;
+        }
+        if(card.type == "Message"){
+            menu.remove(card.nexButton);
+        }
+        if(card.type == "Options"){
+            for (int i = 0; i < card.options.length; i++){
+                menu.remove(card.options[i]);
+            }
+        }
         menu.remove(this);
-        menu.remove(card.option);
     }
 
     private ArrayList<String> wordWrap(String message){

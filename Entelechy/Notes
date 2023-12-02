@@ -1,10 +1,17 @@
-Pixels are shifted on the bottom left of the screen.
+Bugs and Fixes
 
-Screen -> TODO tile and player rendering logic could be moved to into their class's rendering method.
+► Pixels are shifted on the bottom left of the screen.
 
-Level -> TODO render entities if only on screen.
+► Screen -> TODO tile and player rendering logic could be moved to into their class's rendering method.
 
-Game state
-Creation of Levels, Menus, Tiles, Sprites, SpriteAnimation.
+► Level -> TODO render entities if only on screen.
 
-Mouse click dose not registers if mouse moves while clicking.
+► Mouse click dose not registers if mouse moves while clicking.
+► Spam clicking on Hans causes java.util.ConcurrentModificationException. The component ListArray, Fix: https://www.digitalocean.com/community/tutorials/java-util-concurrentmodificationexception
+
+----------------------------------------
+
+Notes
+
+UI
+►  Tabs: Inventory, Skills, Gear, Quest,

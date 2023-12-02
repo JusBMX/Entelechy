@@ -9,6 +9,8 @@ public abstract class Component {
     public int width, height; // The area of the component.
     public Sprite sprite;
 
+    public Action action;
+
     /**
      * Renders the component to the screen.
      * @param screen The screen to render to.

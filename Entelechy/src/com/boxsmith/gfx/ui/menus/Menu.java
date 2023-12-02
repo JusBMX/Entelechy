@@ -94,6 +94,10 @@ public abstract class Menu {
         }
     }
 
+    public List<Component> getComponents(){
+        return components;
+    }
+
     /**
      * Listens for a mouseClick and handles the actions.
      */

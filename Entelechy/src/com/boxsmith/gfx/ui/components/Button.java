@@ -10,8 +10,6 @@ public class Button extends Component {
     private Sprite hoverSprite; // The sprite to render when the button is active.
     private boolean hover = false; // If the mouse is over the component.
 
-    public Action action;
-
     /**
      * Create a button with two different sprites, one for nonactive and active.
      *

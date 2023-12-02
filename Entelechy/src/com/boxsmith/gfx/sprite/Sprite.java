@@ -18,11 +18,13 @@ public class Sprite {
 
 	public static final Sprite PLAYER_FORWARD = new Sprite(32, 16, 0, 224, SpriteSheet.TILES);
 	public static final Sprite PLAYER_SIDE = new Sprite(32, 16, 32, 224, SpriteSheet.TILES);
-
+	//UI
 	public static final Sprite BUTTON = new Sprite(16, 112, 0, 0, SpriteSheet.MENUS);
 	public static final Sprite BUTTON_ACTIVE = new Sprite(16, 112, 0, 16, SpriteSheet.MENUS);
 	public static final Sprite CHAT = new Sprite(128, 256, 0, 32, SpriteSheet.MENUS);
-	public static final Sprite BUTTON_EXIT = new Sprite(128, 256, 0, 32, SpriteSheet.MENUS);
+	public static final Sprite BUTTON_INVENTORY = new Sprite(16, 16, 112, 0, SpriteSheet.MENUS);
+	public static final Sprite BUTTON_INVENTORY_ACTIVE = new Sprite(16, 16, 112, 16, SpriteSheet.MENUS);
+	public static final Sprite INVENTORY = new Sprite(96, 64, 0, 160, SpriteSheet.MENUS);
 
     /**
      * Creates a new sprite with the same width and height.
